@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>SerCandidato</servlet-name>
+        <servlet-class>controlador.SerCandidato</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerCiudadano</servlet-name>
+        <servlet-class>controlador.SerCiudadano</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerMagistrado</servlet-name>
+        <servlet-class>controlador.SerMagistrado</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerPartido</servlet-name>
+        <servlet-class>controlador.SerPartido</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SerCandidato</servlet-name>
+        <url-pattern>/SerCandidato</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerCiudadano</servlet-name>
+        <url-pattern>/SerCiudadano</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerMagistrado</servlet-name>
+        <url-pattern>/SerMagistrado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerPartido</servlet-name>
+        <url-pattern>/SerPartido</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
