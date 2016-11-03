@@ -106,7 +106,7 @@
             <div class="row clearfix" >
                 <!--Formulario-->
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                    <div class="card">
+                    <div class="card m-l-15">
                         <div class="header">
                             <h2>
                                 <i class="material-icons icons-align col-light-blue">person_add</i>
@@ -173,9 +173,10 @@
                                         <label>Foto:</label>
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
-                                        <div class="form-group">                                          
+                                        <div class="form-group">
+                                            <div class="drag-drop">
                                             <input type="file" name="btnImagen" id="btnImagen" class="form-control">
-
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -197,15 +198,14 @@
                                         <!-- EDN# imagen seleccionada-->
                                     </div>
                                 </div>
-
-                                <div class="row clearfix">
-                                    <div class="col-md-12 align-center">
-                                        <input type="button" value="Agregar" class="btn bg-light-blue waves-effect waves-light" id="btnAgregar">
-                                        <button type="button" value="Modificar" id="btnModificar" class="btn bg-light-blue waves-effect waves-light">Modificar</button>
-                                        <button type="reset" id="btnLimpiar" class="btn bg-cyan waves-effect waves-light">Limpiar</button>
-                                    </div>
-                                </div>
                             </form>
+                            <div class="row clearfix acciones">
+                                <div class="col-md-12 align-center">
+                                    <input type="button" value="Agregar" class="btn bg-light-blue waves-effect waves-light" id="btnAgregar">
+                                    <button type="button" value="Modificar" id="btnModificar" class="btn bg-light-blue waves-effect waves-light">Modificar</button>
+                                    <button type="reset" id="btnLimpiar" class="btn bg-cyan waves-effect waves-light">Limpiar</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -237,47 +237,45 @@
                             </ul>
                         </div>
                         <div class="body">
-                            <div class="">
-                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable table-scrollable">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Departamento</th>
-                                            <th>Candidato</th>
-                                            <th>Nombre</th>
-                                            <th>Partido</th>
-                                            <th>Foto</th>
-                                            <th>Opciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="divCandidato">
-                                        <% int listador = 1;
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable text-center">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Departamento</th>
+                                        <th>Candidato</th>
+                                        <th>Nombre</th>
+                                        <th>Partido</th>
+                                        <th>Foto</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="divCandidato">
+                                    <% int listador = 1;
                                         for (Candidato c : CandidatoDTO.mostrarCandidatos()) {%>
-                                        <tr>
-                                            <td><%= listador%></td>
-                                            <td><%= DepartamentoDTO.mostrarDepartamento(c.getIdDepartamento()).getDepartamento()%></td>
-                                            <td><%= c.getNumDui()%></td>
-                                            <td> 
-                                                <%= CiudadanoDTO.mostrarVotante(c.getNumDui()).getApellido()%>, 
-                                                <%= CiudadanoDTO.mostrarVotante(c.getNumDui()).getNombre()%></td>
-                                            <td><%= PartidoDTO.mostrarPartido(c.getIdPartido()).getAcronimo()%></td>
-                                            <td><img src="../images/candidatos/<%= c.getFoto()%>" style="width:60px;height:60px;" ></td>
-                                            <td>
+                                    <tr>
+                                        <td><%= listador%></td>
+                                        <td><%= DepartamentoDTO.mostrarDepartamento(c.getIdDepartamento()).getDepartamento()%></td>
+                                        <td><%= c.getNumDui()%></td>
+                                        <td> 
+                                            <%= CiudadanoDTO.mostrarVotante(c.getNumDui()).getApellido()%>, 
+                                            <%= CiudadanoDTO.mostrarVotante(c.getNumDui()).getNombre()%></td>
+                                        <td><%= PartidoDTO.mostrarPartido(c.getIdPartido()).getAcronimo()%></td>
+                                        <td><img src="../images/files/candidatos/<%= c.getFoto()%>" style="width:32px;height:32px;border-radius: 2px;" ></td>
+                                        <td>
 
-                                                <a class="btn bg-cyan waves-effect m-r-0 waves-light" href="javascript:modificar('<%= c.getIdCandidato()%>','<%= c.getIdPartido()%>','<%= c.getIdDepartamento()%>','<%= c.getNumDui()%>','<img src=../images/candidatos/<%= c.getFoto()%>>')"><i class="material-icons">create</i></a>
-                                                <a class="btn bg-grey waves-effect m-r-0 waves-light" href="javascript:eliminar('<%= c.getIdCandidato()%>')"><i class="material-icons">delete_forever</i></a>
-                                                <!--
-                                                <button type="button" class="btn btn2 bg-cyan waves-effect m-r-0 waves-light" data-toggle="modal" data-target="#modalModificar" ><i class="material-icons">create</i></button>
-                                                <button type="button" class="btn btn2 bg-grey waves-effect m-r-0 waves-light" data-toggle="modal" data-target="#modalEliminar" ><i class="material-icons">delete_forever</i></button>
-                                                -->
+                                            <a class="btn bg-cyan waves-effect m-r-0 waves-light" href="javascript:modificar('<%= c.getIdCandidato()%>','<%= c.getIdPartido()%>','<%= c.getIdDepartamento()%>','<%= c.getNumDui()%>','<img src=../images/candidatos/<%= c.getFoto()%>>')"><i class="material-icons">create</i></a>
+                                            <a class="btn bg-grey waves-effect m-r-0 waves-light" href="javascript:eliminar('<%= c.getIdCandidato()%>')"><i class="material-icons">delete_forever</i></a>
+                                            <!--
+                                            <button type="button" class="btn btn2 bg-cyan waves-effect m-r-0 waves-light" data-toggle="modal" data-target="#modalModificar" ><i class="material-icons">create</i></button>
+                                            <button type="button" class="btn btn2 bg-grey waves-effect m-r-0 waves-light" data-toggle="modal" data-target="#modalEliminar" ><i class="material-icons">delete_forever</i></button>
+                                            -->
 
-                                            </td>
-                                        </tr>
-                                        <% listador++;
+                                        </td>
+                                    </tr>
+                                    <% listador++;
                                         }%>
-                                    </tbody>
-                                </table>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

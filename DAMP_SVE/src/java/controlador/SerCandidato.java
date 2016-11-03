@@ -38,7 +38,7 @@ public class SerCandidato extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
          PrintWriter out = response.getWriter();
         //ruta relativa en donde se guardan las fotos de candidatos
-        String ruta = getServletContext().getRealPath("/")+"images/candidatos/";
+        String ruta = getServletContext().getRealPath("/")+"images/files/candidatos/";
         //Partido p = new Partido();
         Candidato c = new Candidato();
         int accion = 1; //1=gregar  2=modificar
@@ -165,9 +165,9 @@ public class SerCandidato extends HttpServlet {
                 out.print(CiudadanoDTO.mostrarVotante(c.getNumDui()).getNombre());
                 out.print("</td>");
                 out.print("<td>"+PartidoDTO.mostrarPartido(c.getIdPartido()).getAcronimo()+"</td>");
-                out.print("<td><img src=\"../images/candidatos/"+c.getFoto()+"\" style=\"width:60px;height:60px;\" ></td>");
+                out.print("<td><img src=\"../images/files/candidatos/"+c.getFoto()+"\" style=\"width:60px;height:60px;\" ></td>");
                 out.print("<td>");   
-                out.print("<a class=\"btn bg-cyan waves-effect m-r-0 waves-light\" href=\"javascript:modificar('"+c.getIdCandidato()+"','"+c.getIdPartido()+"','"+c.getIdDepartamento()+"','"+c.getNumDui()+"','<img src=../images/candidatos/"+c.getFoto()+">')\"><i class=\"material-icons\">create</i></a>");
+                out.print("<a class=\"btn bg-cyan waves-effect m-r-0 waves-light\" href=\"javascript:modificar('"+c.getIdCandidato()+"','"+c.getIdPartido()+"','"+c.getIdDepartamento()+"','"+c.getNumDui()+"','<img src=../images/files/candidatos/"+c.getFoto()+">')\"><i class=\"material-icons\">create</i></a>");
                 out.print("<a class=\"btn bg-grey waves-effect m-r-0 waves-light\" href=\"javascript:eliminar('<%= c.getIdCandidato()%>')\"><i class=\"material-icons\">delete_forever</i></a>");
                 out.print("</td>");
                 out.print("</tr>");

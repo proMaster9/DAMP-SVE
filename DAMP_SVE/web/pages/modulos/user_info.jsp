@@ -5,8 +5,8 @@
 --%>
 
 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-    <img src="../images/avatar.png" class="ico-user" alt="User">
-    
+    <span style="border:1px solid white;border-radius: 4px;" class="p-b-5 p-t-5 p-l-5 p-r-5"><img src="../images/avatar.png" class="ico-user" alt="User">
+     OOOOOOOOOOOOOOOOO</span>
 </a>
 <ul class="dropdown-menu">
     <li class="header">
