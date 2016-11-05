@@ -126,7 +126,7 @@
                             </ul>
                         </div>
                         <div class="body">
-                            <form method="post" action="../SerMagistrado" id='frmCnr' enctype="multipart/form-data">
+                            <form method="post" action="../SerCiudadano" id='frmCnr' enctype="multipart/form-data">
                                 <div class="row clearfix text-justify">
                                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                         <div class="demo-google-material-icon">
