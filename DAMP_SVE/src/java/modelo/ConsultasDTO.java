@@ -24,7 +24,7 @@ public class ConsultasDTO {
     public static boolean ejecutar(String query) {
         try {
             pst = con.getCnn().prepareStatement(query);
-            pst.execute();
+            pst.executeUpdate();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(ConsultasDTO.class.getName()).log(Level.SEVERE, null, ex);
