@@ -26,7 +26,8 @@
                     var modificar = $("#txtId").val();
                     if (modificar != 0) {
                         $("#frmPartido").submit();
-                    } else {
+                    }
+                    else {
                         alert("No puedes modificar");
                     }
                 });
@@ -41,7 +42,6 @@
                 $("input[name=txtNombre]").val(nombre);
                 $("input[name=txtDui]").val(dui);
                 $("#divImg").html(imagen);
-                $("#txtResultado").val(1);
             }
         </script>
     </head>
@@ -81,11 +81,11 @@
             <div class="row clearfix" >
                 <!--Formulario-->
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                    <div class="card">
+                    <div class="card m-l-15">
                         <div class="header">
                             <h2>
                                 <i class="material-icons icons-align col-light-blue">person_add</i>
-                                AGREGAR PARTIDO POLÍTICO
+                                PARTIDO POLÍTICO
                             </h2>
                             <ul class="header-dropdown m-r-0">
                                 <li>
@@ -148,8 +148,7 @@
                                 <div class="row clearfix">
                                     <div class="col-lg-12 align-center">
                                         <!--Impresion de resultados de busqueda-->
-                                        <div id="divCiudadano">
-                                            
+                                        <div id="divCiudadano"> 
                                             <input type="hidden" name="txtResultado" id="txtResultado">
                                         </div>
                                         <!--Fin de impresion de resultados-->
@@ -162,10 +161,10 @@
                                     </div>
                                 </div>
 
-                                <div class="row clearfix">
+                                <div class="row clearfix acciones">
                                     <div class="col-md-12 align-center">
-                                        <input type="button" value="Agregar" class="btn bg-light-blue waves-effect waves-light" id="btnAgregar">
-                                        <button type="button" value="Modificar" id="btnModificar" class="btn bg-light-blue waves-effect waves-light">Modificar</button>
+                                        <button type="button" id="btnAgregar" class="btn bg-light-blue waves-effect waves-light">Agregar</button>
+                                        <button type="button" id="btnModificar" class="btn bg-light-blue waves-effect waves-light">Modificar</button>
                                         <button type="reset" class="btn bg-cyan waves-effect waves-light">Limpiar</button>
                                     </div>
                                 </div>
@@ -219,15 +218,11 @@
                                         <td><%= listador%></td>
                                         <td><%= p.getAcronimo()%></td>
                                         <td><%= p.getNombre()%></td>
+                                        <td><img src="../images/files/banderas/<%= p.getImagen()%>" style="width:32px;height:32px;" ></td>
                                         <td><%= p.getNumDui()%></td>
-                                        <td><img src="../images/banderas/<%= p.getImagen()%>" style="width:60px;height:60px;" ></td>
                                         <td>
-                                            <a class="btn bg-cyan waves-effect m-r-0 waves-light" href="javascript:modificar('<%= p.getIdPartido()%>','<%= p.getAcronimo()%>','<%= p.getNombre()%>','<%= p.getNumDui()%>','<img src=../images/banderas/<%= p.getImagen()%> >')"><i class="material-icons">create</i></a>
-                                            <a class="btn bg-grey waves-effect m-r-0 waves-light" href="../SerPartido?idPartido=<%= p.getIdPartido()%>"><i class="material-icons">delete_forever</i></a>
-                                        <!--<button type="button" class="btn btn2 bg-cyan waves-effect m-r-0 waves-light" data-toggle="modal" data-target="#modalModificar" ><i class="material-icons">create</i></button>
-                                        <button type="button" class="btn btn2 bg-grey waves-effect m-r-0 waves-light" data-toggle="modal" data-target="#modalEliminar" ><i class="material-icons">delete_forever</i></button>
-                                        -->
-                                        
+                                            <a class="btn bg-cyan waves-effect m-r-0 waves-light" href="javascript:modificar('<%= p.getIdPartido()%>','<%= p.getAcronimo()%>','<%= p.getNombre()%>','<%= p.getNumDui()%>','<img src=../images/files/banderas/<%= p.getImagen()%> >')"><i class="material-icons">create</i></a>
+                                            <a class="btn bg-grey waves-effect m-r-0 waves-light" href="../SerPartido?idPartido=<%= p.getIdPartido()%>"><i class="material-icons">delete_forever</i></a>                                                                       
                                         </td>
                                     </tr>
                                     <% listador++;}%>
@@ -242,123 +237,7 @@
                 <!-- #END# Tabla -->
             </div>
             <!-- Modal Dialogs ====================================================================================================================== -->
-            <!-- Modal Modificar -->
-            <div class="modal fade" id="modalModificar" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="defaultModalLabel">
-                                <i class="material-icons icons-align col-light-blue">loop</i>
-                                Modificar
-                            </h3>
-                        </div>
-                        <div class="modal-body">
-                            <h4>
-                                ¿Desea modificar el usuario seleccionado? 
-                            </h4>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary waves-effect">Aceptar</button>
-                            <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cancelar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Modal Modificar -->
-            <!-- Modal CONFIRMACION Modificado -->
-            <div class="modal fade" id="modalGuardarModificacion" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="defaultModalLabel">
-                                <i class="material-icons icons-align col-light-blue">warning</i>
-                                Desea guardar la modificacion realiizada
-                            </h3>
-                        </div>                        
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary waves-effect">Aceptar</button>
-                            <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cancelar</button>                  
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# CONFIRMACION Modificado -->
-            <!-- Modal Eliminar -->
-            <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="defaultModalLabel">
-                                <i class="material-icons icons-align col-light-blue">delete</i>
-                                Eliminar
-                            </h3>
-                        </div>
-                        <div class="modal-body">
-                            <h4>
-                                ¿Desea eliminar el usuario seleccionado? 
-                            </h4>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary waves-effect">Si, Eliminar</button>
-                            <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">No, Cancelar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Modal Eliminar -->
-            <!-- Modal Confirmaacion de datos guardados con exito-->
-            <div class="modal fade" id="modalDatosGuardados" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="defaultModalLabel">
-                                <i class="material-icons icons-align col-light-blue">done</i>
-                                Datos Guardados Exitosamente
-                            </h3>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary waves-effect">Cerrar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Modal Confirmaacion de datos guardados con exito -->
-
-
-            <!-- Modal Info F-->
-            <div class="modal fade" id="modalInfoF" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="defaultModalLabel">Informacion sobre el formulario</h4>
-                        </div>
-                        <div class="modal-body">
-                            Algunos datos que le podrian ayudar al usuario a registrar otros usuarios
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Ok</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Modal Info T -->
-            <!-- Modal Info F-->
-            <div class="modal fade" id="modalInfoT" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="defaultModalLabel">Informacion sobre el Tabla</h4>
-                        </div>
-                        <div class="modal-body">
-                            Datos sobre la tabla y los permisos que tienen esos usuarios
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Ok</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Modal Info T -->
+            
         </section>
         <jsp:include page="modulos/scripts.jsp"/>
     </body>

@@ -20,7 +20,6 @@
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <title>Importación Datos| TSE</title>
         <jsp:include page="modulos/head.jsp"/>
-        <script src="../js/funciones.js"></script>
         <script>
             $(document).on("ready", function () {
 
@@ -49,7 +48,7 @@
                         } else {
                             $("#" + div).html('<input type="hidden" value="0" data-tipo="resultado">');
                             if ($("#" + dui).val() != "") {
-                                $("#" + div).append("Dui repetido");
+                                $("#" + div).append("<div class='m-t-15 text-justify'><label>Dui Repetido</label></div>");
                             }
                         }
 
@@ -111,12 +110,12 @@
             </div>
             <div class="row clearfix" >
                 <!--Formulario-->
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="card">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-sm-offset-0 col-md-offset-4 col-lg-4">
+                    <div class="card m-l-15">
                         <div class="header">
                             <h2>
                                 <i class="material-icons icons-align col-light-blue">person_add</i>
-                                IMPORTACION DE DATOS
+                                IMPORTAR REGISTROS CNR
                             </h2>
                             <ul class="header-dropdown m-r-0">
                                 <li>
@@ -126,174 +125,120 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="body">   
-                            <form id="frmCnr" action="../SerCiudadano" method="post" enctype="multipart/form-data">
+                        <div class="body">
+                            <form method="post" action="../SerMagistrado" id='frmCnr' enctype="multipart/form-data">
+                                <div class="row clearfix text-justify">
+                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="demo-google-material-icon">
+                                            <i class="material-icons col-green icons-align">assignment_ind</i>
+                                            <span>DUI:</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="demo-google-material-icon">
+                                            <i class="material-icons col-green icons-align">vpn_key</i>
+                                            <span>CONTRASEÑA:</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="demo-google-material-icon">
+                                            <i class="material-icons col-green icons-align">error</i>
+                                            <span>ESTADO</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix text-center">
+                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" id="dui1" data-tipo="dui" name="dui1" autocomplete="off" class="form-control" placeholder="Ingresar numero de DUI">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="password" class="form-control" id="password1" placeholder="Ingrese su contraseña" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 
-                                <table>
-                                    <tr>
-                                        <th>Identificacion</th>
-                                        <th>Contraseña</th>
-                                        <th>Estado</th>
-                                    </tr>
-                                    <!--Magistrado 1-->
-                                    <tr>
-                                        <td><input type="text" id="dui1" data-tipo="dui" name="dui1"></td>
-                                        <td><input type="password" id="password1"></td>
-                                        <td>
-                                            <div id="divMagistrado1">
-                                                <input type="hidden" value="0" data-tipo="resultado">
+                                        <div id="divMagistrado1">
+                                            <input type="hidden" value="0" data-tipo="resultado">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix text-center">
+                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" id="dui2" data-tipo="dui" name="dui2" autocomplete="off" class="form-control" placeholder="Ingresar numero de DUI">
                                             </div>
-                                        </td>
-                                    </tr>
-                                    <!--Magistrado 2-->
-                                    <tr>
-                                        <td><input type="text" id="dui2" data-tipo="dui" name="dui2"></td>
-                                        <td><input type="password" id="password2"></td>
-                                        <td>
-                                            <div id="divMagistrado2">
-                                                <input type="hidden" value="0" data-tipo="resultado">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="password" class="form-control" id="password2" placeholder="Ingrese su contraseña" required>
                                             </div>
-                                        </td>
-                                    </tr>
-                                    <!--Magistrado 3-->
-                                    <tr>
-                                        <td><input type="text" id="dui3" data-tipo="dui" name="dui3"></td>
-                                        <td><input type="password" id="password3"></td>
-                                        <td>
-                                            <div id="divMagistrado3">
-                                                <input type="hidden" value="0" data-tipo="resultado">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+                                        <div id="divMagistrado2">
+                                            <input type="hidden" value="0" data-tipo="resultado">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row clearfix text-center">
+                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" id="dui3" data-tipo="dui" name="dui3" autocomplete="off" class="form-control" placeholder="Ingresar numero de DUI">
                                             </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <input type="file" name="btnArchivo" id="btnSubir" class="btn bg-light-blue waves-effect waves-light" ><br>
-                                
-                                <input type="button" id="btnImportar" value="Importar datos" class="btn bg-light-blue waves-effect waves-light" >
-                                <button type="reset" class="btn bg-cyan waves-effect waves-light">Limpiar</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="password" class="form-control" id="password3" placeholder="Ingrese su contraseña" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+                                        <div id="divMagistrado3">
+                                            <input type="hidden" value="0" data-tipo="resultado">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6 form-control-label">
+                                        <label>SQL:</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
+                                        <div class="form-group">
+                                            <div class="drag-drop">
+                                                <input type="file" name="btnArchivo" id="btnSubir" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix acciones">
+                                    <div class="col-md-12 align-center">
+                                        <button type="button" id="btnImportar" class="btn bg-light-blue waves-effect waves-light">Importar Datos</button>
+                                        <button type="reset" id="btnLimpiar" class="btn bg-cyan waves-effect waves-light">Cancelar</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
-                    </div>
-                </div>
-                <!-- #END# Formulario -->
-            </div>
-            <!-- Modal Dialogs ====================================================================================================================== -->
-            <!-- Modal Modificar -->
-            <div class="modal fade" id="modalModificar" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="defaultModalLabel">
-                                <i class="material-icons icons-align col-light-blue">loop</i>
-                                Modificar
-                            </h3>
-                        </div>
-                        <div class="modal-body">
-                            <h4>
-                                ¿Desea modificar el usuario seleccionado? 
-                            </h4>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary waves-effect">Aceptar</button>
-                            <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cancelar</button>
-                        </div>
+                        <!-- #END# Formulario -->
                     </div>
                 </div>
             </div>
-            <!-- #END# Modal Modificar -->
-            <!-- Modal CONFIRMACION Modificado -->
-            <div class="modal fade" id="modalGuardarModificacion" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="defaultModalLabel">
-                                <i class="material-icons icons-align col-light-blue">warning</i>
-                                Desea guardar la modificacion realiizada
-                            </h3>
-                        </div>                        
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary waves-effect">Aceptar</button>
-                            <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cancelar</button>                  
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# CONFIRMACION Modificado -->
-            <!-- Modal Eliminar -->
-            <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="defaultModalLabel">
-                                <i class="material-icons icons-align col-light-blue">delete</i>
-                                Eliminar
-                            </h3>
-                        </div>
-                        <div class="modal-body">
-                            <h4>
-                                ¿Desea eliminar el usuario seleccionado? 
-                            </h4>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary waves-effect">Si, Eliminar</button>
-                            <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">No, Cancelar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Modal Eliminar -->
-            <!-- Modal Confirmaacion de datos guardados con exito-->
-            <div class="modal fade" id="modalDatosGuardados" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="defaultModalLabel">
-                                <i class="material-icons icons-align col-light-blue">done</i>
-                                Datos Guardados Exitosamente
-                            </h3>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary waves-effect">Cerrar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Modal Confirmaacion de datos guardados con exito -->
-
-
-            <!-- Modal Info F-->
-            <div class="modal fade" id="modalInfoF" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="defaultModalLabel">Informacion sobre el formulario</h4>
-                        </div>
-                        <div class="modal-body">
-                            Algunos datos que le podrian ayudar al usuario a registrar otros usuarios
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Ok</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Modal Info T -->
-            <!-- Modal Info F-->
-            <div class="modal fade" id="modalInfoT" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="defaultModalLabel">Informacion sobre el Tabla</h4>
-                        </div>
-                        <div class="modal-body">
-                            Datos sobre la tabla y los permisos que tienen esos usuarios
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Ok</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Modal Info T -->
         </section>
         <jsp:include page="modulos/scripts.jsp"/>
     </body>

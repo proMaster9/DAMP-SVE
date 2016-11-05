@@ -106,7 +106,7 @@
     margin-left: 5px; }
 
 .navbar-nav .dropdown-menu {
-    margin-top: -40px !important; }
+    margin-top: 10px !important; }
 
 .label-count {
     position: absolute;
@@ -6452,7 +6452,7 @@ fieldset[disabled] .form-control {
     margin-left: 5px; }
 
 .navbar-nav .dropdown-menu {
-    margin-top: -40px !important; }
+    margin-top: 10px !important; }
 
 .label-count {
     position: absolute;

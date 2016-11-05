@@ -18,14 +18,11 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <title>Candidatos | TSE</title>
+        <title>Candidatos Independientes | TSE</title>
         <jsp:include page="modulos/head.jsp"/>
         <script src="../js/funciones.js"></script>
-        <script>
+                <script>
             $(document).on("ready", function () {
-                $("#btAgregar").on("click", function () {
-                    alert("funciona");
-                });
                 $("#btnModificar").prop("disabled", "disabled");
                 enviarForm('frmCandidato', 'btnAgregar');
                 cargarImagen("btnImagen", "divImg");
@@ -34,11 +31,11 @@
                     var modificar = $("#txtId").val();
                     if (modificar != 0) {
                         $("#frmCandidato").submit();
-                    } else {
+                    }
+                    else {
                         alert("No puedes modificar");
                     }
                 });
-                //vlidar el dui del candidato
                 $("#txtDuiCandidato").on("keyup", function () {
                     var dui = $("#txtDuiCandidato").val();
                     var longitud = dui.length;
@@ -48,11 +45,11 @@
                         }, function (data) {
                             $("#divCiudadano").html(data);
                         });
-                    } else {
+                    }
+                    else {
                         $("#divCiudadano").html("<input type='hidden' name='txtResultado' id='txtResultado'>");
                     }
                 });
-
             });
             function modificar(idCandidato, idPartido, idDepartamento, dui, foto) {
                 $("#txtId").val(idCandidato);
@@ -63,7 +60,6 @@
                 $("#btnAgregar").prop("disabled", "disabled");
                 $("#btnModificar").prop("disabled", false);
             }
-
         </script>
     </head>
 
@@ -106,7 +102,7 @@
                         <div class="header">
                             <h2>
                                 <i class="material-icons icons-align col-light-blue">person_add</i>
-                                AGREGAR CANDIDATO
+                                AGREGAR CANDIDATO INDEPENDIENTE
                             </h2>
                             <ul class="header-dropdown m-r-0">
                                 <li>
@@ -125,7 +121,7 @@
                                     <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
                                         <div class="form-group">
                                             <!--Se define que es un candidato partidario-->
-                                            <input type="hidden" name="txtTipo" id="txtTipo" value="1">
+                                            <input type="hidden" name="txtTipo" id="txtTipo" value="2">
                                             <select class="form-control show-tick" data-live-search="true" name="slPartido" id="slPartido">
                                                 <option value="0">Seleccione partido</option>
                                                 <%
@@ -196,14 +192,14 @@
                                         <!-- EDN# imagen seleccionada-->
                                     </div>
                                 </div>
-                                <div class="row clearfix acciones">
-                                    <div class="col-md-12 align-center">
-                                        <input type="button" value="Agregar" class="btn bg-light-blue waves-effect waves-light" id="btnAgregar">
-                                        <button type="button" value="Modificar" id="btnModificar" class="btn bg-light-blue waves-effect waves-light">Modificar</button>
-                                        <button type="reset" id="btnLimpiar" class="btn bg-cyan waves-effect waves-light">Limpiar</button>
-                                    </div>
-                                </div>
                             </form>
+                            <div class="row clearfix acciones">
+                                <div class="col-md-12 align-center">
+                                    <input type="button" value="Agregar" class="btn bg-light-blue waves-effect waves-light" id="btnAgregar">
+                                    <button type="button" value="Modificar" id="btnModificar" class="btn bg-light-blue waves-effect waves-light">Modificar</button>
+                                    <button type="reset" id="btnLimpiar" class="btn bg-cyan waves-effect waves-light">Limpiar</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

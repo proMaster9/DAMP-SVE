@@ -51,7 +51,9 @@
                 <li>
                     <a href="tse_candidato.jsp">Candidato</a>
                 </li>
-                
+                <li>
+                    <a href="tse_candidato_independiente.jsp">Candidato Independiente</a>
+                </li>
             </ul>
         </li>
         <li>
@@ -63,9 +65,7 @@
                 <li>
                     <a href="tse_centro_votacion.jsp">Centros Votación</a>
                 </li>
-                <li>
-                    <a href="tse_asignacion_jrv.jsp">JRV</a>
-                </li>
+                
                
             </ul>
         </li>
@@ -76,16 +76,11 @@
                 <span>Configuraciones</span>
             </a>
             <ul class="ml-menu">
-                <li>
-                    <a href="configuracion_inicial.jsp">Estado Elecciones</a>
-                </li>
-                <li>
-                    <a href="tse_asignacion_jrv.jsp">Asignación de JRV</a>
-                </li>
+                
             </ul>
         </li>
         <li>
-            <a href="importar_registros.jsp">
+            <a href="tse_importacion.jsp">
                 <i class="material-icons col-black">cloud_upload</i>
                 <span>Imporatar Registros CNR</span>
             </a>
@@ -94,8 +89,3 @@
     </ul>
 </div>
 
-<div class="menu">
-    <ul class="list">
-        <li class="header">MENÚ</li>
-    </ul>
-</div>
