@@ -28,6 +28,26 @@
         <servlet-name>SerUsuariosPrincipales</servlet-name>
         <servlet-class>controlador.SerUsuariosPrincipales</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerSesionPrincipal</servlet-name>
+        <servlet-class>controlador.SerSesionPrincipal</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerCerrarSesion</servlet-name>
+        <servlet-class>controlador.SerCerrarSesion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerSesionUsuario</servlet-name>
+        <servlet-class>controlador.SerSesionUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerSesionSupervisor</servlet-name>
+        <servlet-class>controlador.SerSesionSupervisor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerSesionAdmin</servlet-name>
+        <servlet-class>controlador.SerSesionAdmin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerPartido</servlet-name>
         <url-pattern>/SerPartido</url-pattern>
@@ -55,6 +75,26 @@
     <servlet-mapping>
         <servlet-name>SerUsuariosPrincipales</servlet-name>
         <url-pattern>/SerUsuariosPrincipales</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerSesionPrincipal</servlet-name>
+        <url-pattern>/SerSesionPrincipal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerCerrarSesion</servlet-name>
+        <url-pattern>/SerCerrarSesion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerSesionUsuario</servlet-name>
+        <url-pattern>/SerSesionUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerSesionSupervisor</servlet-name>
+        <url-pattern>/SerSesionSupervisor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerSesionAdmin</servlet-name>
+        <url-pattern>/SerSesionAdmin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

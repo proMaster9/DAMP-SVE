@@ -4229,8 +4229,9 @@ section.content {
 
 /* Modals ====================================== */
 .modal .modal-header {
-    border: none;
-    padding: 25px 25px 5px 25px; }
+    border: 1px solid #e2e2e2;
+    padding: 15px;
+    background-color: rgb(228, 228, 228); }
 .modal .modal-header .modal-title {
     font-weight: bold;
     font-size: 16px; }
@@ -4239,7 +4240,7 @@ section.content {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     -ms-border-radius: 0;
-    border-radius: 15px 15px 15px 15px; 
+    border-radius: 4px; 
     background-color: none;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.31) !important;
     border: none; }
@@ -7802,7 +7803,9 @@ Responsive & Scrollable Tables
 .table-scrollable > .table-bordered > tfoot > tr:last-child > td {
     border-bottom: 0;
 }
-
+#mensaje{
+    border: 1px solid #e5e6e9; 
+}
 
 /*=========================Input file==================*/
 /*input[type="file"] {

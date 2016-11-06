@@ -3,10 +3,15 @@
     Created on : 10-oct-2016, 7:00:00
     Author     : EQUIPO DAMP-2016
 --%>
-
+<%@page import="modelo.Ciudadano"%>
+<%@page import="java.util.ArrayList"%>
+<%
+    HttpSession sesion = request.getSession(true);
+    if (sesion.getAttribute("usuario") != null) {
+        ArrayList<Ciudadano> usuario = (ArrayList<Ciudadano>) sesion.getAttribute("usuario");
+%>
 <!DOCTYPE html>
 <html lang="es">
-
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -14,7 +19,6 @@
         <title>Panel Usuario | TSE</title>
         <jsp:include page="modulos/head.jsp"/>
     </head>
-
     <body class="theme-light-blue">
 
         <jsp:include page="modulos/loader.jsp"/>
@@ -67,7 +71,7 @@
                             </ul>
                         </div>
                         <div class="body">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -99,37 +103,7 @@
                             </ul>
                         </div>
                         <div class="body table-responsive">
-                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable text-center">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>DUI:</th>
-                                        <th>Nombre:</th>
-                                        <th>Sexo:</th>
-                                        <th>Tipo Usuario:</th>
-                                        <th>Ubicación:</th>
-                                        <th>Dirección:</th>
-                                        <th>Opciones:</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>0000000-0</td>
-                                        <td>Juan Carlos</td>
-                                        <td>M</td>
-                                        <td>CNR</td>
-                                        <td>La Libertad, Santa Tecla</td>
-                                        <td>frfrfrf</td>
-                                        <td>
-                                            <button type="button" class="btn btn2 bg-cyan waves-effect m-r-0 waves-light" data-toggle="modal" data-target="#modalModificar" ><i class="material-icons">create</i></button>
-                                            <button type="button" class="btn btn2 bg-grey waves-effect m-r-0 waves-light" data-toggle="modal" data-target="#modalEliminar" ><i class="material-icons">delete_forever</i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    
-                                </tbody>
-                            </table>
+
                             <div id="mostrarUsuarios"></div>
                         </div>
                     </div>
@@ -140,3 +114,7 @@
         <jsp:include page="modulos/scripts.jsp"/>
     </body>
 </html>
+<% } else {
+        response.sendRedirect("login/principal.jsp");
+    }
+%>

@@ -1,7 +1,7 @@
 <%-- 
-    Document   : index
-    Created on : 27-oct-2016, 1:31:18
-    Author     : Icchigo
+    Document   : tse_activar_cuenta
+    Created on : 11-06-2016, 04:28:15 AM
+    Author     : Eliiza
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Bienvenido al INDEX</h1>
+        <h1>Vamos activar</h1>
     </body>
 </html>

@@ -19,7 +19,7 @@ public class Conexion {
     private Conexion() {
         try {
             Class.forName("org.postgresql.Driver");
-            cnn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/sistemavotacion2", "postgres", "Itca");
+            cnn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/sistemavotacion", "postgres", "Itca");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

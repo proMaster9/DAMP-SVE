@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 27-oct-2016, 1:31:18
+    Document   : votante
+    Created on : 14-oct-2016, 12:42:48
     Author     : Icchigo
 --%>
 
@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Bienvenido al INDEX</h1>
+        <h1>Hello World!</h1>
     </body>
 </html>

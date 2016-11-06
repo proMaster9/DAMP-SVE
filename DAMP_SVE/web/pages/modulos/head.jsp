@@ -3,7 +3,11 @@
     Created on : 10-oct-2016, 7:00:00
     Author     : EQUIPO DAMP-2016
 --%>
-
+<%
+    HttpSession sesion = request.getSession(true);
+    if (sesion.getAttribute("usuario") != null){
+        response.sendRedirect("../notificaciones/tse_acceso_denegado.jsp");
+%>
 <!-- Favicon-->
 <link rel="icon" href="../images/presentacion.png" type="image/x-icon">
 
@@ -43,3 +47,8 @@
 
 <!-- Jquery Core Js -->
 <script src="../plugins/jquery/jquery.min.js"></script>
+<%
+    } else {
+        response.sendRedirect("../notificaciones/tse_acceso_denegado.jsp");
+    }
+%>

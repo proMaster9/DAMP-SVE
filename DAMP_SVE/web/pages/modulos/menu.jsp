@@ -3,7 +3,11 @@
     Created on : 10-oct-2016, 7:00:00
     Author     : EQUIPO DAMP-2016
 --%>
-
+<%
+    HttpSession sesion = request.getSession(true);
+    if (sesion.getAttribute("usuario") != null) {
+        response.sendRedirect("../notificaciones/tse_acceso_denegado.jsp");
+%>
 <div class="menu">
     <ul class="list">
         <li class="header">MENÚ</li>
@@ -39,7 +43,7 @@
                 <li>
                     <a href="tse_partido.jsp">Registrar Partido</a>
                 </li>
-                
+
             </ul>
         </li>
         <li>
@@ -65,8 +69,8 @@
                 <li>
                     <a href="tse_centro_votacion.jsp">Centros Votación</a>
                 </li>
-                
-               
+
+
             </ul>
         </li>
         <li class="header">Configuración del Sistema</li>
@@ -76,7 +80,7 @@
                 <span>Configuraciones</span>
             </a>
             <ul class="ml-menu">
-                
+
             </ul>
         </li>
         <li>
@@ -88,4 +92,10 @@
 
     </ul>
 </div>
+<%
+    } else {
+        response.sendRedirect("../notificaciones/tse_acceso_denegado.jsp");
+    }
+%>
+
 

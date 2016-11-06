@@ -3,7 +3,11 @@
     Created on : 10-oct-2016, 7:00:00
     Author     : EQUIPO DAMP-2016
 --%>
-
+<%
+    HttpSession sesion = request.getSession(true);
+    if (sesion.getAttribute("usuario") != null) {
+        response.sendRedirect("../notificaciones/tse_acceso_denegado.jsp");
+%>
 <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -16,3 +20,8 @@
         </div>
     </div>
 <!-- #END# Page Loader -->
+<%
+    } else {
+        response.sendRedirect("../notificaciones/tse_acceso_denegado.jsp");
+    }
+%>
