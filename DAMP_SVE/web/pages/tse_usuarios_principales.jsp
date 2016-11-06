@@ -4,6 +4,7 @@
     Author     : EQUIPO DAMP-2016
 --%>
 
+<%@page import="modelo.Municipio"%>
 <%@page import="modelo.CiudadanoDTO"%>
 <%@page import="modelo.Ciudadano"%>
 <%@page import="modelo.MunicipioDTO"%>
@@ -345,7 +346,7 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
                                         <div >
-                                            <select  name="slDepartamento" id="slDepartamento" >
+                                            <select class="form-control show-tick" data-live-search="true" name="slDepartamento" id="slDepartamento" >
                                                 <option value="0">Seleccione departamento</option>
                                                 <% for (Departamento dep : DepartamentoDTO.mostrarDepartamentos()) {%>
                                                 <option value="<%= dep.getIdDepartamento()%>"><%= dep.getDepartamento()%></option>
@@ -360,8 +361,13 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
                                         <div id="divMunicipio">
-                                            <select  name="slMunicipio" id="slMunicipio" >
-                                                <option>Seleccione municipio</option>
+                                            <select class="form-control show-tick" data-live-search="true" name="slMunicipio" id="slMunicipio" >
+                                                <option value="0">Seleccione municipio</option>
+                                                <%
+                                                    for (Municipio m : MunicipioDTO.mostrarMunicipios()) {
+                                                %>
+                                                <option value='<%= m.getIdMunicipio()%>'><%= m.getNombreMunicipio()%></option>
+                                                <% }%>
                                             </select>
                                         </div>
                                     </div>

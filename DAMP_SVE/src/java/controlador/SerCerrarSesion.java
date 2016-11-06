@@ -36,7 +36,10 @@ public class SerCerrarSesion extends HttpServlet {
             HttpSession sesion = request.getSession(true);
             sesion.invalidate();
             response.sendRedirect("index.jsp");
+            }else{
+                response.sendRedirect("index.jsp");
             }
+            
         }
     }
 

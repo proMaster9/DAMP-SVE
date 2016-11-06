@@ -4,6 +4,7 @@
     Author     : EQUIPO DAMP-2016
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Departamento"%>
 <%@page import="modelo.DepartamentoDTO"%>
 <%@page import="modelo.CiudadanoDTO"%>
@@ -11,6 +12,12 @@
 <%@page import="modelo.CandidatoDTO"%>
 <%@page import="modelo.Partido"%>
 <%@page import="modelo.PartidoDTO"%>
+<%
+    HttpSession sesion = request.getSession(true);
+    if (sesion.getAttribute("usuario") != null) {
+        
+%>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -62,6 +69,7 @@
                 $("#divImg").html(foto);
                 $("#btnAgregar").prop("disabled", "disabled");
                 $("#btnModificar").prop("disabled", false);
+                $.post("#",{});
             }
 
         </script>
@@ -385,3 +393,7 @@
         <jsp:include page="modulos/scripts.jsp"/>
     </body>
 </html>
+<% } else {
+        response.sendRedirect("login/principal.jsp");
+    }
+%>

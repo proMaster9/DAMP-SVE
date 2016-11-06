@@ -1,7 +1,7 @@
 <%-- 
-    Document   : principal
-    Created on : 14-oct-2016, 12:34:55
-    Author     : Icchigo
+    Document   : tse
+    Created on : 10-oct-2016, 7:00:00
+    Author     : EQUIPO DAMP-2016
 --%>
 
 <%
@@ -9,8 +9,6 @@
     if (sesion.getAttribute("usuario") != null) {
         response.sendRedirect("../tse.jsp");
     }
-    //Al recibir una respuesta de error desde el servlet se activara el modalAdvertencia
-
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -39,8 +37,10 @@
 
         <!-- Custom Css -->
         <link href="../../css/style.css" rel="stylesheet">
-<link href="../../css/themes/all-themes.css" rel="stylesheet" />
-                <!-- Jquery Core Js -->
+        
+        <link href="../../css/themes/all-themes.css" rel="stylesheet" />
+        
+        <!-- Jquery Core Js -->
         <script src="../../plugins/jquery/jquery.min.js"></script>
         
         <%

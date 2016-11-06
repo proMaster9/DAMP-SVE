@@ -52,6 +52,7 @@
 <script src="../js/pages/cards/colored.js"></script>
 <script src="../js/pages/tables/jquery-datatable.js"></script>
 <script src="../js/pages/ui/modals.js"></script>
+<!--<script src="../js/pages/ui/notifications.js"></script>-->
 <!-- Demo Js -->
 <script src="../js/demo.js"></script>
 <%

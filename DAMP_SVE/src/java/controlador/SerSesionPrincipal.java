@@ -77,7 +77,7 @@ public class SerSesionPrincipal extends HttpServlet {
         try{
             
         /**
-         * posibles errores que se pueden dar y los diferentes modal que se habilitaran
+         * posibles errores que se pueden dar y los diferentes mensajes que se habilitaran
          * modalError=1: campos vacios
          * modalError=2: cuenta no activada
          * modalError=3: datos incorrectos

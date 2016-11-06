@@ -110,7 +110,7 @@
             </div>
             <div class="row clearfix" >
                 <!--Formulario-->
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-sm-offset-0 col-md-offset-4 col-lg-4">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-sm-offset-0 col-md-offset-3">
                     <div class="card m-l-15">
                         <div class="header">
                             <h2>

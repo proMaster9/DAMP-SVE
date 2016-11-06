@@ -74,6 +74,13 @@ public class SerSesionSupervisor extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        /**
+         * posibles errores que se pueden dar y los diferentes mensajes que se habilitaran
+         * modalError=1: campos vacios
+         * modalError=2: cuenta no activada
+         * modalError=3: datos incorrectos
+         */
         try{
          HttpSession sesion = request.getSession();
          if (request.getParameter("btnEntrar") != null) {
@@ -89,18 +96,20 @@ public class SerSesionSupervisor extends HttpServlet {
                             response.sendRedirect("pages/tse_supervisor.jsp");
                         } else {
                             //datos incorrectos
-                            response.sendRedirect("pages/login/supervisor.jsp");
+                            response.sendRedirect("pages/login/supervisor.jsp?modalError=3");
                         }
                     }else{
                         //activar modal notificando que la cuenta no esta activa
-                        response.sendRedirect("pages/login/supervisor.jsp");
+                        response.sendRedirect("pages/login/supervisor.jsp?modalError=2");
                     }
                 } else {
                     //debes completar campos
-                    response.sendRedirect("pages/login/supervisor.jsp");
+                    response.sendRedirect("pages/login/supervisor.jsp?modalError=1");
                 }
             }
-        }catch(Exception e){}
+        }catch(Exception e){
+            response.sendRedirect("pages/notificaciones/tse_sin_servidor.jsp");
+        }
     }
 
     /**

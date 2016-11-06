@@ -75,6 +75,14 @@ public class SerSesionUsuario extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
+            
+         /**
+         * posibles errores que se pueden dar y los diferentes mensajes que se habilitaran
+         * modalError=1: campos vacios
+         * modalError=2: cuenta no activada
+         * modalError=3: datos incorrectos
+         */
+            
          HttpSession sesion = request.getSession();
          if (request.getParameter("btnEntrar") != null) {
                 String user = request.getParameter("txtUser");
@@ -89,15 +97,15 @@ public class SerSesionUsuario extends HttpServlet {
                             response.sendRedirect("pages/tse.jsp");
                         } else {
                             //datos incorrectos
-                            response.sendRedirect("pages/login/usuario.jsp");
+                            response.sendRedirect("pages/login/usuario.jsp?modalError=3");
                         }
                     }else{
                         //activar modal notificando que la cuenta no esta activa
-                        response.sendRedirect("pages/login/usuario.jsp");
+                        response.sendRedirect("pages/login/usuario.jsp?modalError=2");
                     }
                 } else {
                     //debes completar campos
-                    response.sendRedirect("pages/login/usuario.jsp");
+                    response.sendRedirect("pages/login/usuario.jsp?modalError=1");
                 }
             }
         }catch(Exception e){

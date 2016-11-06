@@ -6,8 +6,8 @@
 
 <%
     HttpSession sesion = request.getSession(true);
-    if(sesion.getAttribute("usuario")!=null){
-     response.sendRedirect("../tse.jsp");
+    if(sesion.getAttribute("usuario_externo")!=null){
+     response.sendRedirect("../tse_supervisor.jsp");
     }
 %>
 
@@ -37,6 +37,34 @@
 
         <!-- Custom Css -->
         <link href="../../css/style.css" rel="stylesheet">
+
+        <!-- Jquery Core Js -->
+        <script src="../../plugins/jquery/jquery.min.js"></script>
+
+        <%
+            //Al recibir una respuesta de error desde el servlet se activara el modalAdvertencia
+            //Variable que almacenara el mensaje segun el error
+            String mensaje="";
+            if(request.getParameter("modalError")!=null){
+                String script = "<script>$(document).on('ready',function (){"
+                        + "$('#modalAdvertencia').modal('show');"
+                        + "});</script>";
+                out.print(script);
+                if(Integer.valueOf(request.getParameter("modalError"))==1){
+                    mensaje="Has dejado algun campo vacio que es requerido.<br>";
+                    mensaje+="Asegurate de llenar todos los campos";
+                }else if(Integer.valueOf(request.getParameter("modalError"))==2){
+                    mensaje="Tu cuenta no ha sido activada, es importante que la actives,<br>";
+                    mensaje+="es un proceso necesario para tener acceso al sistema.";
+                    mensaje+="<br><br><a href='../procesos/tse_activar_cuenta.jsp' class='text-right'><i class='material-icons icons-align col-light-blue'>contacts</i>  Activar cuenta</a>";
+                }else if(Integer.valueOf(request.getParameter("modalError"))==3){
+                    mensaje="El usuario o la contraseña no eran correctos.<br>";
+                    mensaje+="Asegurate que los datos sean correctos";
+                }else{
+                    mensaje="Ha ocurrido un error, intenta ingresar otra vez";
+                }
+            }
+        %>
     </head>
     <body class="login-page">
         <div class="login-box">
@@ -84,10 +112,27 @@
                 </div>
             </div>
         </div>
-
-        <!-- Jquery Core Js -->
-        <script src="../../plugins/jquery/jquery.min.js"></script>
-
+         <!-- Modal Dialogs ====================================================================================================================== -->
+        <!-- Modal Notificacion -->
+        <div class="modal fade" id="modalAdvertencia" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="defaultModalLabel"><i class="material-icons icons-align col-light-blue">info</i> NOTIFICACIÓN</h5>
+                        </div>
+                        <div class="modal-body text-center">
+                            <div id="mensaje" class="m-r-30 m-l-30 p-b-10 p-t-10">
+                                <%= mensaje%>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn col-xs-offset-4 col-xs-4 col-white bg-light-blue waves-effect" data-dismiss="modal">OK, Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- #END# Modal Notificacion -->
+        
         <!-- Bootstrap Core Js -->
         <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
 
