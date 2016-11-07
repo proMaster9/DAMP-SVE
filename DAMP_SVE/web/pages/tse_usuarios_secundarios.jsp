@@ -1,7 +1,7 @@
 <%-- 
-    Document   : tse_activar_cuenta
-    Created on : 11-06-2016, 04:28:15 AM
-    Author     : Eliiza
+    Document   : tse_usuarios_secundarios
+    Created on : 15-oct-2016, 15:52:22
+    Author     : Icchigo
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Vamos activar</h1>
+        <h1>Hello World!</h1>
     </body>
 </html>

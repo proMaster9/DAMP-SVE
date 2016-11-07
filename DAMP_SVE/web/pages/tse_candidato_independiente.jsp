@@ -3,7 +3,13 @@
     Created on : 10-oct-2016, 7:30:00
     Author     : EQUIPO DAMP-2016
 --%>
-
+<%@page import="modelo.Ciudadano"%>
+<%@page import="java.util.ArrayList"%>
+<%
+    HttpSession sesion = request.getSession(true);
+    if (sesion.getAttribute("usuario") != null) {
+        ArrayList<Ciudadano> usuario = (ArrayList<Ciudadano>) sesion.getAttribute("usuario");
+%>
 <%@page import="modelo.Departamento"%>
 <%@page import="modelo.DepartamentoDTO"%>
 <%@page import="modelo.CiudadanoDTO"%>
@@ -360,3 +366,7 @@
         <jsp:include page="modulos/scripts.jsp"/>
     </body>
 </html>
+<% } else {
+        response.sendRedirect("login/usuario.jsp");
+    }
+%>

@@ -75,6 +75,9 @@
                 <li>
                     <a href="tse_detalle_asignacion.jsp">Detalle Asignación de Votantes</a>
                 </li>
+                <li>
+                    <a href="tse_detalle_centro.jsp">Detalle Centros Votación</a>
+                </li>
 
 
             </ul>

@@ -15,12 +15,12 @@
 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
     <span style="border:1px solid white;border-radius: 4px;" class="p-b-5 p-t-5 p-l-5 p-r-5">
         <img src="../images/avatar.png" class="ico-user" alt="User">
-        <%= usuario.get(0).getNumDui()%>
+        <%= usuario.get(0).getNumDui()%> , <%= usuario.get(0).getApellido()%>
     </span>
 </a>
 <ul class="dropdown-menu">
-    <li class="header">
-        Opciones
+    <li class="header text-center">
+        <%= usuario.get(0).getRol()%>
     </li>
     <li class="body">
         <ul class="menu">
@@ -47,7 +47,7 @@
         </ul>
     </li>
     <li class="footer">
-        <a href="javascript:void(0);">View All Notifications</a>
+        <a href="javascript:void(0);">No olvides Cerrar Sesión</a>
     </li>
 </ul>
 <%

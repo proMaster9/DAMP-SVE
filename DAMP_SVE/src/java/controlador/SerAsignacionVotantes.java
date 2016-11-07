@@ -90,7 +90,7 @@ public class SerAsignacionVotantes extends HttpServlet {
             html += "<td>" + d.getMunicipio() + "</td>";
             html += "<td>" + d.getCentro() + "</td>";
             html += "<td>" + d.getMunicipio() + "</td>";
-            html += "<td>" + d.getCiudadano() + "</td>";
+            html += "<td class='text-left'>" + d.getCiudadano() + "</td>";
             html += "</tr>";
             
             listador++;
@@ -101,11 +101,14 @@ public class SerAsignacionVotantes extends HttpServlet {
     //mostrar ciudadanos asignados al centro de votacion
     public static String mostrarAsignacionCentro(int idCentro) {
         String html = "";
+        int listador=1;
         for (DetalleAsignacion d : AsignacionVotantesDTO.mostrarDetalleAsignacion(0, 0, idCentro, "")) {
             html += "<tr>";
+            html +="<td>"+listador+"</td>";
             html += "<td>" + d.getCorrelativo() + "</td>";
-            html += "<td>" + d.getCiudadano() + "</td>";
+            html += "<td class='text-left'>" + d.getCiudadano() + "</td>";
             html += "</tr>";
+            listador++;
         }
         return html;
     }

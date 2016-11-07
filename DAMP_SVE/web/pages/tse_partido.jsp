@@ -6,6 +6,13 @@
 
 <%@page import="modelo.Partido"%>
 <%@page import="modelo.PartidoDTO"%>
+<%@page import="modelo.Ciudadano"%>
+<%@page import="java.util.ArrayList"%>
+<%
+    HttpSession sesion = request.getSession(true);
+    if (sesion.getAttribute("usuario") != null) {
+        ArrayList<Ciudadano> usuario = (ArrayList<Ciudadano>) sesion.getAttribute("usuario");
+%>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -251,3 +258,7 @@
         <jsp:include page="modulos/scripts.jsp"/>  
     </body>
 </html>
+<% } else {
+        response.sendRedirect("login/usuario.jsp");
+    }
+%>

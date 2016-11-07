@@ -56,6 +56,10 @@
         <servlet-name>SerMunicipio</servlet-name>
         <servlet-class>controlador.SerMunicipio</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerActivarCuenta</servlet-name>
+        <servlet-class>controlador.SerActivarCuenta</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerPartido</servlet-name>
         <url-pattern>/SerPartido</url-pattern>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>SerMunicipio</servlet-name>
         <url-pattern>/SerMunicipio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerActivarCuenta</servlet-name>
+        <url-pattern>/SerActivarCuenta</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
