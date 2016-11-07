@@ -4,6 +4,8 @@
     Author     : EQUIPO DAMP-2016
 --%>
 
+<%@page import="modelo.Ciudadano"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="modelo.CentroVotacionDTO"%>
 <%@page import="modelo.CentroVotacion"%>
 <%@page import="modelo.MunicipioDTO"%>
@@ -13,9 +15,13 @@
 <%@page import="modelo.CiudadanoDTO"%>
 <%@page import="modelo.Candidato"%>
 <%@page import="modelo.CandidatoDTO"%>
+<%
+    HttpSession sesion = request.getSession(true);
+    if (sesion.getAttribute("usuario") != null) {
+        ArrayList<Ciudadano> usuario = (ArrayList<Ciudadano>) sesion.getAttribute("usuario");
+%>
 <!DOCTYPE html>
 <html lang="es">
-
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -132,7 +138,7 @@
             <%
                 //hagamos de cuenta que el gestor de jrv es de san ahuachapan,
                 //el departamento 1, este valor se tomaria de la variable de sesion
-                int departamento = 1;
+                int departamento = 2;
             %>
             <div class="row clearfix" >
                 <!--Formulario-->
@@ -308,3 +314,7 @@
         <jsp:include page="modulos/scripts.jsp"/>
     </body>
 </html>
+<% } else {
+        response.sendRedirect("login/usuario.jsp");
+    }
+%>

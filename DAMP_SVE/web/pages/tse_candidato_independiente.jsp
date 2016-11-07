@@ -116,25 +116,6 @@
                             <form method="post" name="frmCandidato" id="frmCandidato" action="../SerCandidato" enctype="multipart/form-data">
                                 <div class="row clearfix">
                                     <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6 form-control-label">
-                                        <label>Partido:</label>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
-                                        <div class="form-group">
-                                            <!--Se define que es un candidato partidario-->
-                                            <input type="hidden" name="txtTipo" id="txtTipo" value="2">
-                                            <select class="form-control show-tick" data-live-search="true" name="slPartido" id="slPartido">
-                                                <option value="0">Seleccione partido</option>
-                                                <%
-                                                    for (Partido p : PartidoDTO.mostrarPartidos()) {
-                                                %>
-                                                <option value="<%= p.getIdPartido()%>"><%= p.getAcronimo()%></option>
-                                                <% }%>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6 form-control-label">
                                         <label>Departamento:</label>
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
@@ -238,7 +219,6 @@
                                         <th>Departamento</th>
                                         <th>Candidato</th>
                                         <th>Nombre</th>
-                                        <th>Partido</th>
                                         <th>Foto</th>
                                         <th>Opciones</th>
                                     </tr>
@@ -246,7 +226,7 @@
                                 <tbody id="divCandidato">
                                     <% int listador = 1;
                                         for (Candidato c : CandidatoDTO.mostrarCandidatos()) {
-                                            if (c.getTipo() == 1) {
+                                            if (c.getTipo() == 2) {
                                     %>
 
                                     <tr>
@@ -257,7 +237,6 @@
                                             <%= CiudadanoDTO.mostrarVotante(c.getNumDui()).getApellido()%>, 
                                             <%= CiudadanoDTO.mostrarVotante(c.getNumDui()).getNombre()%>
                                         </td>
-                                        <td><%= PartidoDTO.mostrarPartido(c.getIdPartido()).getAcronimo()%></td>
                                         <td><img src="../images/files/candidatos/<%= c.getFoto()%>" style="width:32px;height:32px;" ></td>
                                         <td>
                                             <a class="btn bg-cyan waves-effect m-r-0 waves-light" href="javascript:modificar('<%= c.getIdCandidato()%>','<%= c.getIdPartido()%>','<%= c.getIdDepartamento()%>','<%= c.getNumDui()%>','<img src=../images/files/candidatos/<%= c.getFoto()%>>')"><i class="material-icons">create</i></a>

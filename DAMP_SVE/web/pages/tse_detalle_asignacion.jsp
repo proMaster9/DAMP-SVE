@@ -3,6 +3,7 @@
     Created on : 10-oct-2016, 7:00:00
     Author     : EQUIPO DAMP-2016
 --%>
+<%@page import="controlador.SerAsignacionVotantes"%>
 <%@page import="modelo.Ciudadano"%>
 <%@page import="java.util.ArrayList"%>
 <%
@@ -16,11 +17,10 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <title>Panel Usuario | TSE</title>
+        <title>Detalle de Asignación de Votantes | TSE</title>
         <jsp:include page="modulos/head.jsp"/>
     </head>
     <body class="theme-light-blue">
-
         <jsp:include page="modulos/loader.jsp"/>
         <!-- Overlay For Sidebars -->
         <div class="overlay"></div>
@@ -53,14 +53,16 @@
                     <h2></h2>
                 </div>
             </div>
+            <!--no se muestran datos, a menos que ya esten asignados los ciudadanos-->
+            <% if (SerAsignacionVotantes.cantidadAsignacion() == 0) { %>
             <div class="row clearfix" >
                 <!--Formulario-->
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="card m-l-15">
                         <div class="header">
                             <h2>
                                 <i class="material-icons icons-align col-light-blue">person_add</i>
-                                USUARIOS PRINCIPALES
+                                DETALLE DE ASIGNACIÓN DE VOTANTES
                             </h2>
                             <ul class="header-dropdown m-r-0">
                                 <li>
@@ -71,18 +73,22 @@
                             </ul>
                         </div>
                         <div class="body">
-
+                            Nota: los ciudadanos aun no han sido asignados a los centros de votacion<br>
                         </div>
                     </div>
                 </div>
                 <!-- #END# Formulario -->
+            </div>
+            <% } else {%>
+            <!--Impresion en caso de que ya esten asignados-->
+            <div class="row clearfix" >
                 <!--Tabla-->
-                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                    <div class="card">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card m-l-15">
                         <div class="header">
                             <h2>
                                 <i class="material-icons icons-align col-light-blue">assignment_ind</i>
-                                USUARIOS PRINCIPALES REGISTRADOS EN EL SISTEMA
+                                VOTANTES ASIGNADOS
                             </h2>
                             <ul class="header-dropdown m-r-0">
                                 <li>
@@ -102,14 +108,28 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="body table-responsive">
-
-                            <div id="mostrarUsuarios"></div>
+                        <div class="body">
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable text-center">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Departamento:</th>
+                                        <th>Municipio:</th>
+                                        <th>Centro Votación:</th>
+                                        <th>Correlativo:</th>
+                                        <th>Ciudadano:</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%= SerAsignacionVotantes.mostrarAsignacion() %>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
                 <!-- #END# Tabla -->
             </div>
+            <% } %>
         </section>
         <jsp:include page="modulos/scripts.jsp"/>
     </body>

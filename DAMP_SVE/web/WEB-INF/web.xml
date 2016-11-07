@@ -48,6 +48,14 @@
         <servlet-name>SerSesionAdmin</servlet-name>
         <servlet-class>controlador.SerSesionAdmin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerAsignacionVotantes</servlet-name>
+        <servlet-class>controlador.SerAsignacionVotantes</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerMunicipio</servlet-name>
+        <servlet-class>controlador.SerMunicipio</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerPartido</servlet-name>
         <url-pattern>/SerPartido</url-pattern>
@@ -95,6 +103,14 @@
     <servlet-mapping>
         <servlet-name>SerSesionAdmin</servlet-name>
         <url-pattern>/SerSesionAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerAsignacionVotantes</servlet-name>
+        <url-pattern>/SerAsignacionVotantes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerMunicipio</servlet-name>
+        <url-pattern>/SerMunicipio</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

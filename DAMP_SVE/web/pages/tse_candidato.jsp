@@ -4,6 +4,7 @@
     Author     : EQUIPO DAMP-2016
 --%>
 
+<%@page import="modelo.Ciudadano"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Departamento"%>
 <%@page import="modelo.DepartamentoDTO"%>
@@ -15,7 +16,7 @@
 <%
     HttpSession sesion = request.getSession(true);
     if (sesion.getAttribute("usuario") != null) {
-        
+    ArrayList<Ciudadano> usuario = (ArrayList<Ciudadano>) sesion.getAttribute("usuario");    
 %>
 
 <!DOCTYPE html>
