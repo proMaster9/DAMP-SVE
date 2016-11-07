@@ -25,8 +25,7 @@ function enviarForm(formulario, boton) {
     $("#" + boton).on("click", function () {
         if ($("#txtResultado").val() == 0) {
             alert("No puedes enviar");
-        }
-        else {
+        } else {
             $("#" + formulario).submit();
         }
     });
@@ -50,9 +49,9 @@ function mostrarCiudadano(caja, resultado, servlet, tipo) {
             }, function (data) {
                 $("#" + resultado).html(data);
             });
-        }
-        else {
+        } else {
             $("#" + resultado).html('<input type="hidden" name="txtResultado" id="txtResultado" value="0">');
+            
         }
     });
 }

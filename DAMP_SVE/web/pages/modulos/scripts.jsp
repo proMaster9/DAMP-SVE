@@ -23,8 +23,8 @@
 <!-- JQuery Steps Plugin Js -->
 <script src="../plugins/jquery-steps/jquery.steps.js"></script>
 
-    <!-- Bootstrap Notify Plugin Js -->
-    <script src="../plugins/bootstrap-notify/bootstrap-notify.js"></script>
+<!-- Bootstrap Notify Plugin Js 
+<script src="../plugins/bootstrap-notify/bootstrap-notify.js"></script>-->
     
 <!-- Sweet Alert Plugin Js -->
 <script src="../plugins/sweetalert/sweetalert.min.js"></script>

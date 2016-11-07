@@ -62,6 +62,7 @@
 
             });
             function modificar(idCandidato, idPartido, idDepartamento, dui, foto) {
+                $.post("#",{idcandidato:idCandidato,idPartido:idPartido, idDepartamento:idDepartamento, dui:dui, foto:foto});
                 $("#txtId").val(idCandidato);
                 $("#slPartido").val(idPartido);
                 $("#slDepartamento").val(idDepartamento);
@@ -69,7 +70,8 @@
                 $("#divImg").html(foto);
                 $("#btnAgregar").prop("disabled", "disabled");
                 $("#btnModificar").prop("disabled", false);
-                $.post("#",{});
+                
+                
             }
 
         </script>
@@ -289,7 +291,7 @@
             </div>
             <!-- Modal Dialogs ====================================================================================================================== -->
             <!-- Modal Modificar -->
-            <div class="modal fade" id="modalModificar" tabindex="-1" role="dialog">
+            <div class="modal fade" id="modalModificar" tabindex="-1" role="dialog" >
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
