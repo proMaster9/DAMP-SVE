@@ -11,7 +11,7 @@
 <nav class="navbar">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="panel-usuario.jsp">TSE ELECCIONES 2018</a>
+            <a class="navbar-brand" href="panel-usuario.jsp"><img style="width: 90px; height: 25px;" src="../images/tse-logo-nav.png"/></a>
             <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
             <a href="javascript:void(0);" class="bars"></a>
 

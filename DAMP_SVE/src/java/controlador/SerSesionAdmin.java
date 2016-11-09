@@ -73,14 +73,12 @@ public class SerSesionAdmin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         /**
-         * posibles errores que se pueden dar y los diferentes mensajes que se habilitaran
-         * modalError=1: campos vacios
-         * modalError=2: cuenta no activada
-         * modalError=3: datos incorrectos
+         * posibles errores que se pueden dar y los diferentes mensajes que se
+         * habilitaran modalError=1: campos vacios modalError=2: cuenta no
+         * activada modalError=3: datos incorrectos
          */
-        
         try {
             HttpSession sesion = request.getSession();
             if (request.getParameter("btnEntrar") != null) {
@@ -94,36 +92,36 @@ public class SerSesionAdmin extends HttpServlet {
 
                 String user = request.getParameter("txtUser");
                 String pass = request.getParameter("txtPass");
-                
+
                 //verificando que los campos claves no esten vacios
                 if (!key1.equals("") && !key2.equals("")) {
-                    
+
                     //validando la informacion
                     if (key1.equals("/DAMP_SVE/pages/login/admin/admin.jsp") && key2.equals("rgb(255, 255, 255)")) {
- 
-                    //veficando que los campos no esten vacios
-                    if (!user.equals("") && !pass.equals("")) {
-                        Ciudadano c = entrarAdmi(user, pass);
-                        if (c.getConfirmacion() == 0) {
+
+                        //veficando que los campos no esten vacios
+                        if (!user.equals("") && !pass.equals("")) {
+                            Ciudadano c = entrarAdmi(user, pass);
                             if (user.equals(c.getNumDui()) && pass.equals(c.getContrasenia())) {
-                                ArrayList<Ciudadano> usuario = new ArrayList<>();
-                                usuario.add(c);
-                                sesion.setAttribute("usuario", usuario);
-                                response.sendRedirect("pages/tse.jsp");
+                                if (c.getConfirmacion() == 1) {
+                                    ArrayList<Ciudadano> usuario = new ArrayList<>();
+                                    usuario.add(c);
+                                    sesion.setAttribute("usuario", usuario);
+                                    response.sendRedirect("pages/tse.jsp");
+                                } else {
+                                    //datos incorrectos
+                                    response.sendRedirect("pages/login/admin/admin.jsp?modalError=2");
+                                }
                             } else {
-                                //datos incorrectos
+                                //activar modal notificando que la cuenta no esta activa
                                 response.sendRedirect("pages/login/admin/admin.jsp?modalError=3");
                             }
-                        } else {
-                            //activar modal notificando que la cuenta no esta activa
-                            response.sendRedirect("pages/login/admin/admin.jsp?modalError=2");
-                        }
 
+                        } else {
+                            //debes completar campos
+                            response.sendRedirect("pages/login/admin/admin.jsp?modalError=3");
+                        }
                     } else {
-                        //debes completar campos
-                        response.sendRedirect("pages/login/admin/admin.jsp?modalError=3");
-                    }
-                    }else{
                         //redirecciona al login del admin, sin notificar nada, porque si los datos no coinciden, puede que el usuario intento modificar
                         //el html, por traer datos el parametro se asume que la persona que intenta ingresar esta en el login, pero no se le notifica nada
                         //solo se recarga la pagina

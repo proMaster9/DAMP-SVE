@@ -28,6 +28,8 @@
         <!-- Animation Css -->
         <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
 
+        <!-- Bootstrap Select Css -->
+        <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
         <!-- Custom Css -->
         <link href="../../css/style.css" rel="stylesheet">
 
@@ -35,56 +37,59 @@
 
         <!-- Jquery Core Js -->
         <script src="../../plugins/jquery/jquery.min.js"></script>
-
-        <%
-            //Al recibir una respuesta de error desde el servlet se activara el modalAdvertencia
-            //Variable que almacenara el mensaje segun el error
-            /*String mensaje="";
-            if(request.getParameter("modalError")!=null){
-                String script = "<script>$(document).on('ready',function (){"
-                        + "$('#modalAdvertencia').modal('show');"
-                        + "});</script>";
-                out.print(script);
-                if(Integer.valueOf(request.getParameter("modalError"))==1){
-                    mensaje="Has dejado algun campo vacio que es requerido.<br>";
-                    mensaje+="Asegurate de llenar todos los campos";
-                }else if(Integer.valueOf(request.getParameter("modalError"))==2){
-                    mensaje="Tu cuenta no ha sido activada, es importante que la actives,<br>";
-                    mensaje+="es un proceso necesario para tener acceso al sistema.";
-                    mensaje+="<br><br><a href='../procesos/tse_activar_cuenta.jsp' class='text-right'><i class='material-icons icons-align col-light-blue'>contacts</i>  Activar cuenta</a>";
-                }else if(Integer.valueOf(request.getParameter("modalError"))==3){
-                    mensaje="El usuario o la contraseña no eran correctos.<br>";
-                    mensaje+="Asegurate que los datos sean correctos";
-                }else{
-                    mensaje="Ha ocurrido un error, intenta ingresar otra vez";
-                }
-            }*/
-        %>
         <script>
             $(document).on("ready", function () {
-                $("#btnVerificar").on("click", function () {
-                    var dui = $("#txtDui").val();
+                $("#btnValidar").on("click", function () {
+                    var user = $("#txtUser").val();
                     var pass = $("#txtPass").val();
-                    $("#txtPass").val("");
-                    $.post('../SerActivacion', {
+                    $.post('../../SerActivarCuenta', {
                         txtPrincipal: 'true',
-                        txtDui: dui,
+                        txtUser: user,
                         txtPass: pass
                     }, function (data) {
-                        $("#divActivacion").html(data);
+                        if (data === "1") {
+                            $('#mensaje').html("Su cuenta no esta activada.<br>");
+                            $('#mensaje').append("Se comenzará con el proceso de activación");
+                            $('#modalNoti').modal('show');
+                            $("#divDis").html("");
+                            $.post('../../SerActivarCuenta', {divHtml: 'true'}, function (data) {
+                                $('#divHtml').html(data);
+                            });
+                        } else if (data === "2") {
+                            $('#modalNoti').modal('show');
+                            $('#mensaje').html("La cuenta ya esta activada.<br>");
+                            $('#mensaje').append("<br><center><a href='../login/principal.jsp'><i class='material-icons icons-align col-light-blue'>contacts</i> Iniciar Sesión</a></center>");
+                            $('#divBtn').html('<button type="button" class="btn col-xs-offset-4 col-xs-4 col-white bg-light-blue waves-effect" data-dismiss="modal">OK, Cerrar</button>');
+                        } else {
+                            $('#modalNoti').modal('show');
+                            $('#mensaje').html("Ha dejado campos vacios, que son requeridos");
+                            $('#divBtn').html('<button type="button" class="btn col-xs-offset-4 col-xs-4 col-white bg-light-blue waves-effect" data-dismiss="modal">OK, Cerrar</button>');
+                        }
+
                     });
+
+                });
+                $("#btnValidar2").on("click", function () {
+                    var user = $("#txtUser").val();
+                    var pass = $("#txtPass").val();
+                    var pass2 = $("#txtPass2").val();
+                    var pregunta = $("#slPregunta").val();
+                    var respuesta = $("#txtRespuesta").val();
+                    $.post('../../SerActivarCuenta', {
+                        txtActivar: 'true',
+                        txtUser: user,
+                        txtPass: pass,
+                        txtPass2: pass2,
+                        idPregunta: pregunta,
+                        txtRespuesta: respuesta
+
+                    }, function (data) {
+                         $('#modalNoti').modal('show');
+                         $('#mensaje').html(data);
+                    });
+                    
                 });
             });
-            function activar() {
-                var dui = $("#txtDui").val();
-                $.post('../SerActivacion', {
-                    txtActivacionPrincipal: 'true',
-                    txtDui: dui
-                }, function (data) {
-                    $("#divActivacion").html(data);
-                });
-            }
-
         </script>
     </head>
     <body class="login-page">
@@ -95,7 +100,7 @@
                     <div class="msg"><img src="../login/tse-logo.jpg"/></div>
                 </div>
                 <div class="body" >
-                    <form id="sign_in" method="post" action="../../SerActivarCuenta">
+                    <form method="post">
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <small>ACTIVAR CUENTA USUARIOS PRINCIPALES</small>
@@ -106,7 +111,7 @@
                                 <i class="material-icons col-light-blue">person</i>
                             </span>
                             <div class="form-line">
-                                <input type="text" class="form-control" name="txtUser" maxlength="10" minlength="10" placeholder="Ingrese su número de dui" required autofocus>
+                                <input type="text" class="form-control" name="txtUser" id="txtUser" maxlength="10" minlength="10" placeholder="Ingrese su número de dui" required autofocus>
                             </div>
                         </div>
                         <div class="input-group">
@@ -114,12 +119,20 @@
                                 <i class="material-icons col-light-blue">lock</i>
                             </span>
                             <div class="form-line">
-                                <input type="password" class="form-control" name="txtPass" placeholder="Ingrese su contraseña" required>
+                                <input type="password" class="form-control" name="txtPass" id="txtPass" placeholder="Ingrese su contraseña" required>
                             </div>
+                        </div>
+                        <div id="divHtml">
+
+
                         </div>
                         <div class="row">
                             <div class=" col-xs-offset-4 col-xs-4">
-                                <button class="btn btn-block bg-light-blue waves-effect" type="button" name="btnVerificar">Verificar</button>
+                                <div id="divDis">
+                                <button class="btn btn-block bg-light-blue waves-effect" type="button" name="btnValidar" id="btnValidar">Verificar</button>
+                                </div>
+                                <br>
+                                <button class="btn btn-block bg-light-blue waves-effect" type="button" name="btnValidar2" id="btnValidar2">enviar</button>
                             </div>
                         </div>
                     </form>
@@ -128,19 +141,21 @@
         </div>
         <!-- Modal Dialogs ====================================================================================================================== -->
         <!-- Modal Notificacion -->
-        <div class="modal fade" id="modalAdvertencia" tabindex="-1" role="dialog">
+        <div class="modal fade" id="modalNoti" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="defaultModalLabel"><i class="material-icons icons-align col-light-blue">info</i> NOTIFICACIÓN</h5>
                     </div>
                     <div class="modal-body text-center">
-                        <div id="mensaje" class="m-r-30 m-l-30 p-b-10 p-t-10">
+                        <div id="mensaje" class="m-r-30 m-l-30 p-b-10 p-t-10 p-r-5 p-l-5 text-justify">
 
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn col-xs-offset-4 col-xs-4 col-white bg-light-blue waves-effect" data-dismiss="modal">OK, Cerrar</button>
+                        <div id="divBtn">
+                            <button type="button" class="btn col-xs-offset-4 col-xs-4 col-white bg-light-blue waves-effect" data-dismiss="modal">OK, Cerrar</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -149,6 +164,9 @@
 
         <!-- Bootstrap Core Js -->
         <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+
+        <!-- Select Plugin Js -->
+        <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script>
 
         <!-- Waves Effect Plugin Js -->
         <script src="../../plugins/node-waves/waves.js"></script>

@@ -534,5 +534,36 @@ public class CiudadanoDTO {
         }
         return c;
     }
+    public static boolean activarCuenta(int idUsuario) {
+        String query = "update usuario set confirmacion=1 where id_usuario=?";
+        try {
+            pst = con.getCnn().prepareStatement(query);
+            pst.setInt(1, idUsuario);
+            pst.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(CiudadanoDTO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            con.desconectar();
+        }
+        return false;
+    }
+    public static boolean ingresarRespuesta(Respuesta r) {
+        String query = "insert into respuesta values(?,?,?);";
+        try {
+            pst = con.getCnn().prepareStatement(query);
+            pst.setInt(1, r.getIdUsuario());
+            pst.setInt(2, r.getIdPregunta());
+            pst.setString(3, r.getRespuesta());
+            pst.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(CiudadanoDTO.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } finally {
+            con.desconectar();
+        }
+        return false;
+    }
 
 }

@@ -57,6 +57,7 @@ public class SerSesionPrincipal extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -88,7 +89,7 @@ public class SerSesionPrincipal extends HttpServlet {
                 String pass = request.getParameter("txtPass");
                 if (!user.equals("") && !pass.equals("")) {
                     Ciudadano c = entrarPrincipal(user, pass);
-                    if(c.getConfirmacion() == 0 ){
+                    if(c.getConfirmacion() == 1 ){
                         if (user.equals(c.getNumDui()) && pass.equals(c.getContrasenia())){
                             ArrayList<Ciudadano> usuario = new ArrayList<>();
                             usuario.add(c);
@@ -96,7 +97,7 @@ public class SerSesionPrincipal extends HttpServlet {
                             response.sendRedirect("pages/tse.jsp");
                         } else {
                             //datos incorrectos
-                            response.sendRedirect("pages/login/principal.jsp?modalError=3");
+                            response.sendRedirect("pages/procesos/tse_activar_cuenta1.jsp?modalError=3");
                         }
                     }else{
                         //activar modal notificando que la cuenta no esta activa
