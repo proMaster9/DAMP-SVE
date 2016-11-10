@@ -7,11 +7,15 @@ function limpiarLogin() {
     $("#txtUser").val("");
     $("#txtPass").val("");
     $("#txtRes").val("");
+    $("#slPregunta option[value='0']").attr("selected","selected");
 }
 /*=============Funcion validar acceso===============*/
 function validarAcceso(data) {
-    alert(data);
-    if (data === "1") {
+    if(data==="0"){
+        $(".grafico").html("<img src=\"../../images/acciones_ico/campo_vacio.png\"/>");
+        $(".texto").html("No has seleccionado la pregunta de seguridad");
+        $('#modalAdvertencia').modal('show');
+    }else if (data === "1") {
         limpiarLogin();
         window.location.href = "../../pages/notificaciones/tse_advertencia.jsp";
     } else if (data === "2") {

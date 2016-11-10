@@ -137,6 +137,7 @@ public class CiudadanoDTO {
      */
     public static Ciudadano entrarVotante(String credencial, String contrasenia, int idPregunta, String respuesta) {
         Ciudadano c = new Ciudadano();
+        
         String query = "select * from entrarVotante(?,?,?,?)";
         try {
             pst = con.getCnn().prepareStatement(query);
@@ -156,7 +157,6 @@ public class CiudadanoDTO {
                 c.setIdMunicipio(rs.getInt("id_municipio"));
                 c.setIdDepartamento(rs.getInt("id_departamento"));
                 c.setRol(rs.getString("tipo"));
-                
             }
         } catch (SQLException ex) {
             Logger.getLogger(CiudadanoDTO.class.getName()).log(Level.SEVERE, null, ex);
@@ -568,7 +568,10 @@ public class CiudadanoDTO {
         }
         return false;
     }
-    public static void main(String[] args) {
-        CiudadanoDTO.entrarVotante("00000003-0","12345",1,"abc");
-    }
+    /*public static void main(String[] args) {
+        Ciudadano c=CiudadanoDTO.entrarVotante("00000003-0","12345",1,"abc");
+        Respuesta r= RespuestaDTO.verificarRespuesta(c.getIdUsuario());
+        
+       
+    }*/
 }

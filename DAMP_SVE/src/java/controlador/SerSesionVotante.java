@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import modelo.Ciudadano;
 import static modelo.CiudadanoDTO.entrarVotante;
 import modelo.Respuesta;
+import modelo.RespuestaDTO;
 
 /**
  *
@@ -101,11 +102,11 @@ public class SerSesionVotante extends HttpServlet {
                     //validando la informacion
                     if (key1.equals("/DAMP_SVE/pages/login/principal.jsp") || key2.equals("rgb(3, 169, 244)")) {
                         //veficando que los campos no esten vacios
-                        if (!user.equals("") && !pass.equals("")) {
+                        if (!user.equals("") && !pass.equals("") && !res.equals("")) {
                             Ciudadano c = entrarVotante(user,pass,preg,res);
-                            System.out.println(""+c.getNumDui()+c.getContrasenia());
-                            Respuesta r = new Respuesta();
+                            Respuesta r= RespuestaDTO.verificarRespuesta(c.getIdUsuario());
                             //verificando que la contraseña y el password sean correctos
+                             System.out.println(""+c.getNumDui()+ c.getContrasenia()+ r.getIdPregunta() + r.getRespuesta());
                             if (user.equals(c.getNumDui()) && pass.equals(c.getContrasenia())){
                                 //verificando que el usuario este activo en el sistema
                                 if (c.getConfirmacion() == 1) {
