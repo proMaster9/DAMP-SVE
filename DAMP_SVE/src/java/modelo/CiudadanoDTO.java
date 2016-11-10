@@ -568,5 +568,7 @@ public class CiudadanoDTO {
         }
         return false;
     }
-
+    public static void main(String[] args) {
+        CiudadanoDTO.entrarVotante("00000003-0","12345",1,"abc");
+    }
 }

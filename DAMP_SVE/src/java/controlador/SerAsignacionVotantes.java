@@ -163,8 +163,8 @@ public class SerAsignacionVotantes extends HttpServlet {
             boolean coincidencia = false;
             String dui = request.getParameter("txtDui");
             String pass = request.getParameter("txtPass");
-                Ciudadano c = CiudadanoDTO.entrarVotante(dui, pass);
-                if(c.getIdUsuario() != 0) {
+                //Ciudadano c = CiudadanoDTO.entrarVotante(dui, pass);
+                /*if(c.getIdUsuario() != 0) {
                     for(DetalleAsignacion a:AsignacionVotantesDTO.mostrarDetalleAsignacion(0, 0, 0, dui)) {
                         coincidencia = true;
                         CentroVotacion centro = CentroVotacionDTO.mostrarCentro(a.getIdCentro());
@@ -183,7 +183,7 @@ public class SerAsignacionVotantes extends HttpServlet {
                 }
                 else {
                     out.print("Lo sentimos, Parece que las credenciales<br>son incorrectas :(");
-                }
+                }*/
         }
     }
 

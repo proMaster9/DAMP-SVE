@@ -10,7 +10,7 @@ function limpiarLogin() {
 }
 /*=============Funcion validar acceso===============*/
 function validarAcceso(data) {
-    data="6";
+    alert(data);
     if (data === "1") {
         limpiarLogin();
         window.location.href = "../../pages/notificaciones/tse_advertencia.jsp";
@@ -29,15 +29,15 @@ function validarAcceso(data) {
     } else if (data === "5") {
         limpiarLogin();
         $(".grafico").html("<img src=\"../../images/acciones_ico/inactivo.png\"/>");
-        $(".texto").html("Tu cuenta esta inactiva, comunicate con el administrador del sistema<br>");
-        $(".texto").append("<center><a href='../../pages/procesos/tse_activar_cuenta.jsp'><i class='material-icons icons-align col-light-blue'>security</i> Iniciar Sesión</a></center>");
+        $(".texto").html("Tu cuenta esta inactiva, puedes activarla en el siguiente enlace: <a href='../../pages/procesos/tse_activar_cuenta.jsp'><i class='material-icons icons-align col-light-blue'>security</i> Activar Cuenta</a>");
+        $(".texto").append("<center></center>");
         $('#modalAdvertencia').modal('show');
         limpiarLogin();
     } else if (data === "6") {
         limpiarLogin();
         $(".grafico").html("<img src=\"../../images/acciones_ico/inactivo.png\"/>");
         $(".texto").html("Tu cuenta esta inactiva, comunicate con el administrador del sistema<br>");
-        $(".texto").append("<center><a href='../../pages/procesos/tse_activar_cuenta.jsp'><i class='material-icons icons-align col-light-blue'>security</i> Iniciar Sesión</a></center>");
+        $(".texto").append("<center><a href='../../pages/procesos/tse_activar_cuenta.jsp'><i class='material-icons icons-align col-light-blue'>security</i> Activar Cuenta</a></center>");
         $('#modalAdvertencia').modal('show');
         limpiarLogin();
     }else if (data === "7") {
