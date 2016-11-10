@@ -135,13 +135,15 @@ public class CiudadanoDTO {
      con el tipo Ciudadano que contiene la información del votante, en caso contrario
      retorna el objeto vacio
      */
-    public static Ciudadano entrarVotante(String credencial, String contrasenia) {
+    public static Ciudadano entrarVotante(String credencial, String contrasenia, int idPregunta, String respuesta) {
         Ciudadano c = new Ciudadano();
-        String query = "select * from entrarVotante(?,?)";
+        String query = "select * from entrarVotante(?,?,?,?)";
         try {
             pst = con.getCnn().prepareStatement(query);
             pst.setString(1, credencial);
             pst.setString(2, contrasenia);
+            pst.setInt(3, idPregunta);
+            pst.setString(4, respuesta);
             rs = pst.executeQuery();
             while (rs.next()) {
                 c.setIdUsuario(rs.getInt("id_usuario"));
@@ -154,6 +156,7 @@ public class CiudadanoDTO {
                 c.setIdMunicipio(rs.getInt("id_municipio"));
                 c.setIdDepartamento(rs.getInt("id_departamento"));
                 c.setRol(rs.getString("tipo"));
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(CiudadanoDTO.class.getName()).log(Level.SEVERE, null, ex);

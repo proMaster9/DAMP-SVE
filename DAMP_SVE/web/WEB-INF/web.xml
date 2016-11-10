@@ -60,6 +60,14 @@
         <servlet-name>SerActivarCuenta</servlet-name>
         <servlet-class>controlador.SerActivarCuenta</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerVotante</servlet-name>
+        <servlet-class>controlador.SerVotante</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerSesionVotante</servlet-name>
+        <servlet-class>controlador.SerSesionVotante</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerPartido</servlet-name>
         <url-pattern>/SerPartido</url-pattern>
@@ -119,6 +127,14 @@
     <servlet-mapping>
         <servlet-name>SerActivarCuenta</servlet-name>
         <url-pattern>/SerActivarCuenta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerVotante</servlet-name>
+        <url-pattern>/SerVotante</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerSesionVotante</servlet-name>
+        <url-pattern>/SerSesionVotante</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

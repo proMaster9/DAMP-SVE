@@ -74,42 +74,60 @@ public class SerSesionUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
-            
-         /**
-         * posibles errores que se pueden dar y los diferentes mensajes que se habilitaran
-         * modalError=1: campos vacios
-         * modalError=2: cuenta no activada
-         * modalError=3: datos incorrectos
-         */
-            
-         HttpSession sesion = request.getSession();
-         if (request.getParameter("btnEntrar") != null) {
-                String user = request.getParameter("txtUser");
-                String pass = request.getParameter("txtPass");
-                if (!user.equals("") && !pass.equals("")) {
-                    Ciudadano c = entrarSecundario(user, pass);
-                    if(c.getConfirmacion() == 0 ){
-                        if (user.equals(c.getNumDui()) && pass.equals(c.getContrasenia())){
-                            ArrayList<Ciudadano> usuario = new ArrayList<>();
-                            usuario.add(c);
-                            sesion.setAttribute("usuario",usuario);
-                            response.sendRedirect("pages/tse.jsp");
+                try {
+            PrintWriter out = response.getWriter();
+            response.setContentType("text/html;charset=UTF-8");
+            /**
+             * Los datos son recibidos desde el archivo function_admin.js
+             * enviados por jquery Cuando retorne a la pagina del login puede devolver 
+             * 1: si las dos llaves de validacion principla estan vacias 
+             * 2: si las dos llaves de validacion principal son incorrectas 
+             * 3: si el usuario y password vienen vacios 
+             * 4: si el usuario y el password no son  correctos 
+             * 5: si el usuario no esta activo 
+             * 6: si todo esta bien redirecciona a la pagina tse.jsp
+             */
+            if (request.getParameter("btnEntrar") != null) {
+                String key1 = request.getParameter("key1");//retorna la url donde se ubica el login del admin
+                String key2 = request.getParameter("key2");//retorna el color del body del login del admin
+                String user = request.getParameter("user");//retornal el usuario
+                String pass = request.getParameter("pass");//retornal la contraseña
+
+                //verificando que los campos claves no esten vacios
+                if (!key1.equals("") && !key2.equals("")) {
+                    //validando la informacion
+                    if (key1.equals("/DAMP_SVE/pages/login/principal.jsp") || key2.equals("rgb(3, 169, 244)")) {
+                        //veficando que los campos no esten vacios
+                        if (!user.equals("") && !pass.equals("")) {
+                            Ciudadano c = entrarSecundario(user, pass);
+                            //verificando que la contraseña y el password sean correctos
+                            if (user.equals(c.getNumDui()) && pass.equals(c.getContrasenia())) {
+                                //verificando que el usuario este activo en el sistema
+                                if (c.getConfirmacion() == 1) {
+                                    //contruyendo el arraylist de sesion
+                                    HttpSession sesion = request.getSession();
+                                    ArrayList<Ciudadano> usuario = new ArrayList<>();
+                                    usuario.add(c);
+                                    sesion.setAttribute("usuario", usuario);
+                                    out.print("6");//acceso permitido
+                                } else {
+                                    out.print("5");//usuario inactivo
+                                }
+                            } else {
+                                out.print("4");//usuario y contraseña incorrectos
+                            }
                         } else {
-                            //datos incorrectos
-                            response.sendRedirect("pages/login/usuario.jsp?modalError=3");
+                            out.print("3");//campos vacios
                         }
-                    }else{
-                        //activar modal notificando que la cuenta no esta activa
-                        response.sendRedirect("pages/login/usuario.jsp?modalError=2");
+                    } else {
+                        out.print("2");//redirecciona a la pagina de advertencia
                     }
                 } else {
-                    //debes completar campos
-                    response.sendRedirect("pages/login/usuario.jsp?modalError=1");
+                    out.print("1");//redirecciona a la pagina de advertencia 
                 }
             }
-        }catch(Exception e){
-            response.sendRedirect("pages/notificaciones/tse_sin_servidor.jsp");
+        } catch (Exception e) {
+            response.sendRedirect("pages/notificaciones/tse_advertencia.jsp");
         }
     }
 

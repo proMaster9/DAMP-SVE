@@ -71,7 +71,7 @@
             <div class="card">
                 <div class="logo">
                     <br>
-                    <div class="msg"><img src="tse-logo.jpg"/></div>
+                    <div class="msg"><img src="../../images/tse-logo.jpg"/></div>
                 </div>
                 <div class="body" >
                     <form id="sign_in" method="post" action="../../SerSesionSupervisor">                 

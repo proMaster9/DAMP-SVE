@@ -9,7 +9,7 @@
         response.sendRedirect("../notificaciones/tse_acceso_denegado.jsp");
 %>
 <!-- Favicon-->
-<link rel="icon" href="../images/tse_logo.png" type="image/x-icon">
+<link rel="icon" href="../images/logo_tse_ico.png" type="image/x-icon">
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">

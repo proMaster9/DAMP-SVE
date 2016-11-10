@@ -7,7 +7,6 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import modelo.Ciudadano;
 import modelo.CiudadanoDTO;
 import static modelo.CiudadanoDTO.entrarPrincipal;
-import static modelo.CiudadanoDTO.activarCuenta;
 import modelo.Pregunta;
 import modelo.PreguntaDTO;
 import modelo.Respuesta;
@@ -31,7 +29,7 @@ public class SerActivarCuenta extends HttpServlet {
     public static String mostrarPreguntas() {
         String html = "";
         html = "<select class=\"form-control show-tick\" data-live-search=\"true\" name=\"slPregunta\" id=\"slPregunta\">";
-        html += "<option>Seleccione una pregunta</option>";
+        html += "<option value=\"0\">Seleccione una pregunta</option>";
         for (Pregunta p : PreguntaDTO.mostrar()) {
             html += "<option value='" + p.getIdPregunta() + "'>" + p.getPregunta() + "</option>";
         }
@@ -140,7 +138,7 @@ public class SerActivarCuenta extends HttpServlet {
                 String pass2 = request.getParameter("txtPass2");
                 int idPregunta = Integer.valueOf(request.getParameter("idPregunta"));
                 String respuesta = request.getParameter("txtRespuesta");
-                Ciudadano c = CiudadanoDTO.entrarVotante(user, pass);
+                /*Ciudadano c = CiudadanoDTO.entrarVotante(user, pass);
                 CiudadanoDTO.activarCuenta(c.getIdUsuario());
                 System.out.println(c.getIdUsuario());
                 Respuesta r =new  Respuesta(c.getIdUsuario(),idPregunta,respuesta);
@@ -148,7 +146,7 @@ public class SerActivarCuenta extends HttpServlet {
                     out.print("verdadero");
                 }else{
                     out.print("Falso");
-                }
+                }*/
                 
             }
         } catch (Exception e) {

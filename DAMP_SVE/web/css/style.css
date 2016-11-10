@@ -4250,7 +4250,6 @@ section.content {
 
 .modal .modal-footer {
     border: none; }
-
 .modal-col-red {
     background-color: #F44336; }
 .modal-col-red .modal-body,
@@ -7803,10 +7802,17 @@ Responsive & Scrollable Tables
 .table-scrollable > .table-bordered > tfoot > tr:last-child > td {
     border-bottom: 0;
 }
-#mensaje{
-    border: 1px solid #e5e6e9; 
-}
 
+.mensaje{
+    border: 1px solid #e5e6e9;
+    background-color: #f9f9f9; 
+    border-radius: 2px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    
+}
 /*=========================Input file==================*/
 /*input[type="file"] {
     height: 0px;

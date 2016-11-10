@@ -73,67 +73,61 @@ public class SerSesionAdmin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        /**
-         * posibles errores que se pueden dar y los diferentes mensajes que se
-         * habilitaran modalError=1: campos vacios modalError=2: cuenta no
-         * activada modalError=3: datos incorrectos
-         */
         try {
             HttpSession sesion = request.getSession();
-            if (request.getParameter("btnEntrar") != null) {
-                //validacion para verificar que los parametros si estan haciendo enviados desde la pagina del admin
-                //para evitar que otra persona intente ingresar por medio de la url, o de algun otro sitio que no sea
-                //la propia pagina del administrador, por el motivo que si entra como administrador el sistema estaria
-                //expuesto cualquier alteracion
-                //chiave significa llave en idioma italiano
-                String key1 = request.getParameter("txtChiave1");//retorna la url donde se ubica el login del admin
-                String key2 = request.getParameter("txtChiave2");//retorna el color del body del login del admin
+            PrintWriter out = response.getWriter();
+            response.setContentType("text/html;charset=UTF-8");
 
-                String user = request.getParameter("txtUser");
-                String pass = request.getParameter("txtPass");
+            /**
+             * Los datos son recibidos desde el archivo function_admin.js
+             * enviados por jquery Cuando retorne a la pagina del login puede devolver 
+             * 1: si las dos llaves de validacion principla estan vacias 
+             * 2: si las dos llaves de validacion principal son incorrectas 
+             * 3: si el usuario y password vienen vacios 
+             * 4: si el usuario y el password no son  correctos 
+             * 5: si el usuario no esta activo 
+             * 6: si todo esta bien redirecciona a la pagina tse.jsp
+             */
+            if (request.getParameter("btnEntrar") != null) {
+                String key1 = request.getParameter("key1");//retorna la url donde se ubica el login del admin
+                String key2 = request.getParameter("key2");//retorna el color del body del login del admin
+                String user = request.getParameter("user");//retornal el usuario
+                String pass = request.getParameter("pass");//retornal la contraseña
 
                 //verificando que los campos claves no esten vacios
                 if (!key1.equals("") && !key2.equals("")) {
-
                     //validando la informacion
                     if (key1.equals("/DAMP_SVE/pages/login/admin/admin.jsp") && key2.equals("rgb(255, 255, 255)")) {
-
                         //veficando que los campos no esten vacios
                         if (!user.equals("") && !pass.equals("")) {
                             Ciudadano c = entrarAdmi(user, pass);
+                            //verificando que la contraseña y el password sean correctos
                             if (user.equals(c.getNumDui()) && pass.equals(c.getContrasenia())) {
+                                //verificando que el usuario este activo en el sistema
                                 if (c.getConfirmacion() == 1) {
+                                    //contruyendo el arraylist de sesion
                                     ArrayList<Ciudadano> usuario = new ArrayList<>();
                                     usuario.add(c);
                                     sesion.setAttribute("usuario", usuario);
-                                    response.sendRedirect("pages/tse.jsp");
+                                    out.print("6");//acceso permitido
                                 } else {
-                                    //datos incorrectos
-                                    response.sendRedirect("pages/login/admin/admin.jsp?modalError=2");
+                                    out.print("5");//usuario inactivo
                                 }
                             } else {
-                                //activar modal notificando que la cuenta no esta activa
-                                response.sendRedirect("pages/login/admin/admin.jsp?modalError=3");
+                                out.print("4");//usuario y contraseña incorrectos
                             }
-
                         } else {
-                            //debes completar campos
-                            response.sendRedirect("pages/login/admin/admin.jsp?modalError=3");
+                            out.print("3");//campos vacios
                         }
                     } else {
-                        //redirecciona al login del admin, sin notificar nada, porque si los datos no coinciden, puede que el usuario intento modificar
-                        //el html, por traer datos el parametro se asume que la persona que intenta ingresar esta en el login, pero no se le notifica nada
-                        //solo se recarga la pagina
-                        response.sendRedirect("pages/login/admin/admin.jsp");
+                        out.print("2");//redirecciona a la pagina de advertencia
                     }
                 } else {
-                    //redireccina al index sin notificar al que intenta entrar por otro medio
-                    response.sendRedirect("index.jsp");
+                    out.print("1");//redirecciona a la pagina de advertencia 
                 }
             }
         } catch (Exception e) {
-            response.sendRedirect("pages/notificaciones/tse_sin_servidor.jsp");
+            response.sendRedirect("pages/notificaciones/tse_advertencia.jsp");
         }
     }
 

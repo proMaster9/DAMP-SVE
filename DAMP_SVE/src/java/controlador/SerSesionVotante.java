@@ -14,13 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.Ciudadano;
-import static modelo.CiudadanoDTO.entrarPrincipal;
+import static modelo.CiudadanoDTO.entrarVotante;
+import modelo.Respuesta;
 
 /**
  *
  * @author Eliiza
  */
-public class SerSesionPrincipal extends HttpServlet {
+public class SerSesionVotante extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +40,10 @@ public class SerSesionPrincipal extends HttpServlet {
 //            out.println("<!DOCTYPE html>");
 //            out.println("<html>");
 //            out.println("<head>");
-//            out.println("<title>Servlet SerSesionPrincipal</title>");            
+//            out.println("<title>Servlet SerSesionVotante</title>");            
 //            out.println("</head>");
 //            out.println("<body>");
-//            out.println("<h1>Servlet SerSesionPrincipal at " + request.getContextPath() + "</h1>");
+//            out.println("<h1>Servlet SerSesionVotante at " + request.getContextPath() + "</h1>");
 //            out.println("</body>");
 //            out.println("</html>");
 //        }
@@ -57,11 +58,10 @@ public class SerSesionPrincipal extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            response.sendRedirect("pages/notificaciones/tse_advertencia.jsp");
+        response.sendRedirect("pages/notificaciones/tse_advertencia.jsp");
     }
 
     /**
@@ -86,31 +86,40 @@ public class SerSesionPrincipal extends HttpServlet {
              * 3: si el usuario y password vienen vacios 
              * 4: si el usuario y el password no son  correctos 
              * 5: si el usuario no esta activo 
-             * 6: si todo esta bien redirecciona a la pagina tse.jsp
+             * 6: si la pregunta y la respuesta no son correctos
+             * 7: si todo esta bien redirecciona a la pagina papeleta.jsp
              */
-            if (request.getParameter("btnEntrar") != null) {
-                String key1 = request.getParameter("key1");//retorna la url donde se ubica el login del admin
-                String key2 = request.getParameter("key2");//retorna el color del body del login del admin
-                String user = request.getParameter("user");//retornal el usuario
-                String pass = request.getParameter("pass");//retornal la contraseña
-
+            if (request.getParameter("btnEntrarV") != null) {
+                String key1 = request.getParameter("key1");//captura la url donde se ubica el login del admin
+                String key2 = request.getParameter("key2");//captura el color del body del login del admin
+                String user = request.getParameter("user");//captura el usuario
+                String pass = request.getParameter("pass");//captura la contraseña
+                int preg = Integer.parseInt(request.getParameter("preg"));//captura la id pregunta
+                String res = request.getParameter("res");//captura la respuesta
                 //verificando que los campos claves no esten vacios
                 if (!key1.equals("") && !key2.equals("")) {
                     //validando la informacion
                     if (key1.equals("/DAMP_SVE/pages/login/principal.jsp") || key2.equals("rgb(3, 169, 244)")) {
                         //veficando que los campos no esten vacios
                         if (!user.equals("") && !pass.equals("")) {
-                            Ciudadano c = entrarPrincipal(user, pass);
+                            Ciudadano c = entrarVotante(user,pass,preg,res);
+                            System.out.println(""+c.getNumDui()+c.getContrasenia());
+                            Respuesta r = new Respuesta();
                             //verificando que la contraseña y el password sean correctos
-                            if (user.equals(c.getNumDui()) && pass.equals(c.getContrasenia())) {
+                            if (user.equals(c.getNumDui()) && pass.equals(c.getContrasenia())){
                                 //verificando que el usuario este activo en el sistema
                                 if (c.getConfirmacion() == 1) {
-                                    //contruyendo el arraylist de sesion
-                                    HttpSession sesion = request.getSession();
-                                    ArrayList<Ciudadano> usuario = new ArrayList<>();
-                                    usuario.add(c);
-                                    sesion.setAttribute("usuario", usuario);
-                                    out.print("6");//acceso permitido
+                                    //verificando que la pregunta y respuesta sean correctas
+                                    if (preg==r.getIdPregunta() && res.equals(r.getRespuesta())){
+                                        //contruyendo el arraylist de sesion
+                                        HttpSession sesion = request.getSession();
+                                        ArrayList<Ciudadano> usuario = new ArrayList<>();
+                                        usuario.add(c);
+                                        sesion.setAttribute("usuario", usuario);
+                                        out.print("7");//acceso permitido
+                                    }else {
+                                        out.print("6");//pregunta y respuesta incorrectas
+                                    }
                                 } else {
                                     out.print("5");//usuario inactivo
                                 }
@@ -130,7 +139,6 @@ public class SerSesionPrincipal extends HttpServlet {
         } catch (Exception e) {
             response.sendRedirect("pages/notificaciones/tse_advertencia.jsp");
         }
-        
     }
 
     /**

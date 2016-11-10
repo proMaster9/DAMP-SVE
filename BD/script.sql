@@ -1,4 +1,4 @@
-
+﻿
 create sequence sec_departamento;
 CREATE TABLE departamento(
     id_departamento INT default nextval('sec_departamento'),
@@ -894,7 +894,7 @@ create or replace function agregarPrincipal(
 $body$
 begin
     if(tipo = 2 or tipo = 3 or tipo = 6) then
-        insert into usuario (id_tipo_usuario, contrasenia, confirmacion) values (tipo, _contrasenia, 0);
+        insert into usuario (id_tipo_usuario, contrasenia, confirmacion) values (tipo, _contrasenia, 1);
         insert into credencialtemporal (id_usuario, num_dui) values (lastval(), _num_dui);
         insert into excepcionUsuario (id_usuario,num_dui, nombre, apellido, fecha_nac, sexo, direccion_especifica, id_municipio)
         values (lastval(),_num_dui,_nombre,_apellido,_fecha_nac,_sexo,_direccion,_municipio);
@@ -1024,5 +1024,15 @@ execute procedure agregarVotante_trigger();
 insert into usuario (id_tipo_usuario,contrasenia,confirmacion) values(1,'12345',0);
 insert into credencialTemporal (id_usuario, num_dui) values (lastval(),'00000000-0');
 
+/*cuenta de magistrados*/
+select agregarPrincipal('00000001-0','12345','Teresa','Ramirez','2016-12-12','f','Cerca de la ues',28,2);
 
 
+/*cuenta para votante*/
+insert into padronelectoral values('00000050-0','Jorge','Anne','1995-02-10','m','Direccion postisa',2);
+
+/*cuenta para representante de partido*/
+select agregarSecundario('00000050-0','12345',5);
+
+/*cuentas para supervisores externos*/
+select agregarSupervisor('00-00-00','12345','Fernando','Ayala','m','Dinamarca','OEA');
