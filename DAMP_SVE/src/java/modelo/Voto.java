@@ -7,15 +7,25 @@ package modelo;
  */
 public class Voto {
     
-    protected int idVoto;
-    protected int idJrv;
+    private int idVoto;
+    private int idJrv;
+    private int idUsuario;
 
     public Voto() {
     }
 
-    public Voto(int idVoto, int idJrv) {
+    public Voto(int idVoto, int idJrv, int idUsuario) {
         this.idVoto = idVoto;
         this.idJrv = idJrv;
+        this.idUsuario = idUsuario;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public int getIdVoto() {
@@ -33,5 +43,7 @@ public class Voto {
     public void setIdJrv(int idJrv) {
         this.idJrv = idJrv;
     }
+
+
 
 }

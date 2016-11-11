@@ -81,15 +81,7 @@
                                 <label><a href='../../index.jsp' class='text-right'><i class='material-icons icons-align col-light-blue'>reply</i>REGRESAR</a></label>
                             </div>
                             <div class="col-xs-4">
-                                <button class="btn btn-block bg-light-blue waves-effect" type="button" name="btnEntrar" id="btnEntrar">Entrar</button>
-                            </div>
-                        </div>
-                        <div class="row m-t-15 m-b--20">
-                            <div class="col-xs-5">
-                                <a href="../procesos/tse_activar_cuenta.jsp">Activar cuenta</a>
-                            </div>
-                            <div class="col-xs-7 align-right">
-                                <a href="../procesos/recuperar_cuenta.jsp">¿Olvido su contraseña?</a>
+                                <button class="btn btn-block bg-light-blue waves-effect" type="button" name="btnEntrar" id="btnEntrar">Activar</button>
                             </div>
                         </div>
                     </form>

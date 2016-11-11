@@ -20,18 +20,14 @@ public class VotoIndependiente extends Voto{
     public VotoIndependiente() {
     }
 
-    public VotoIndependiente(int idVoto, int idJrv) {
-        super(idVoto, idJrv);
-    }
-
     public VotoIndependiente(int idVotoIndependiente, ArrayList<Candidato> candidato, ArrayList<Double> valorPorcentual) {
         this.idVotoIndependiente = idVotoIndependiente;
         this.candidato = candidato;
         this.valorPorcentual = valorPorcentual;
     }
 
-    public VotoIndependiente(int idVotoIndependiente, ArrayList<Candidato> candidato, ArrayList<Double> valorPorcentual, int idVoto, int idJrv) {
-        super(idVoto, idJrv);
+    public VotoIndependiente(int idVotoIndependiente, ArrayList<Candidato> candidato, ArrayList<Double> valorPorcentual, int idVoto, int idJrv, int idUsuario) {
+        super(idVoto, idJrv, idUsuario);
         this.idVotoIndependiente = idVotoIndependiente;
         this.candidato = candidato;
         this.valorPorcentual = valorPorcentual;
@@ -60,7 +56,7 @@ public class VotoIndependiente extends Voto{
     public void setValorPorcentual(ArrayList<Double> valorPorcentual) {
         this.valorPorcentual = valorPorcentual;
     }
-    
+
     
     
 }

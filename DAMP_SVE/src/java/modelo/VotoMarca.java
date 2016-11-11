@@ -16,18 +16,14 @@ public class VotoMarca extends Voto{
     public VotoMarca() {
     }
 
-    public VotoMarca(int idVoto, int idJrv) {
-        super(idVoto, idJrv);
-    }
-
     public VotoMarca(int idVotoMarca, ArrayList<Candidato> candidato, ArrayList<Double> valorPorcentual) {
         this.idVotoMarca = idVotoMarca;
         this.candidato = candidato;
         this.valorPorcentual = valorPorcentual;
     }
 
-    public VotoMarca(int idVotoMarca, ArrayList<Candidato> candidato, ArrayList<Double> valorPorcentual, int idVoto, int idJrv) {
-        super(idVoto, idJrv);
+    public VotoMarca(int idVotoMarca, ArrayList<Candidato> candidato, ArrayList<Double> valorPorcentual, int idVoto, int idJrv, int idUsuario) {
+        super(idVoto, idJrv, idUsuario);
         this.idVotoMarca = idVotoMarca;
         this.candidato = candidato;
         this.valorPorcentual = valorPorcentual;
@@ -56,6 +52,5 @@ public class VotoMarca extends Voto{
     public void setValorPorcentual(ArrayList<Double> valorPorcentual) {
         this.valorPorcentual = valorPorcentual;
     }
-  
-    
+   
 }

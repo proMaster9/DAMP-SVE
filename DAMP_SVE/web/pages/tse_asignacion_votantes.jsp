@@ -66,6 +66,8 @@
                         var dui1 = $("#dui1").val();
                         var dui2 = $("#dui2").val();
                         var dui3 = $("#dui3").val();
+                        $("#btnAsignar").attr("disabled","disabled");
+                        $("#btnAsignar").attr("value","Asignando...");
                         $.post('../SerAsignacionVotantes', {
                             btnAsignacion: true,
                             txtDui1: dui1,

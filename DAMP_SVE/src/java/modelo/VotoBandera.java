@@ -15,8 +15,15 @@ public class VotoBandera extends Voto{
     public VotoBandera() {
     }
 
-    public VotoBandera(int idVoto, int idJrv) {
-        super(idVoto, idJrv);
+    public VotoBandera(int idVotoBandera, int idPartido) {
+        this.idVotoBandera = idVotoBandera;
+        this.idPartido = idPartido;
+    }
+
+    public VotoBandera(int idVotoBandera, int idPartido, int idVoto, int idJrv, int idUsuario) {
+        super(idVoto, idJrv, idUsuario);
+        this.idVotoBandera = idVotoBandera;
+        this.idPartido = idPartido;
     }
 
     public int getIdVotoBandera() {
@@ -34,7 +41,7 @@ public class VotoBandera extends Voto{
     public void setIdPartido(int idPartido) {
         this.idPartido = idPartido;
     }
-    
-    
+
+   
     
 }

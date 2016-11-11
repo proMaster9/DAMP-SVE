@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.Ciudadano;
 import modelo.CiudadanoDTO;
-import static modelo.CiudadanoDTO.entrarPrincipal;
+import static modelo.CiudadanoDTO.mostrarVotante;
 import modelo.Pregunta;
 import modelo.PreguntaDTO;
-import modelo.Respuesta;
+import modelo.RespuestaDTO;
 
 /**
  *
@@ -87,69 +87,62 @@ public class SerActivarCuenta extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        response.setContentType("text/html;charset=UTF-8;");
-        request.setCharacterEncoding("UTF-8");
         try {
-            HttpSession sesion = request.getSession();
-            if (request.getParameter("txtPrincipal") != null) {
-                String user = request.getParameter("txtUser");
-                String pass = request.getParameter("txtPass");
-                if (!user.equals("") && !pass.equals("")) {
-                    Ciudadano c = entrarPrincipal(user, pass);
-                    if (c.getConfirmacion() == 0) {
-                        out.print("1");//si la cuenta no esta activa retorna 1
+            PrintWriter out = response.getWriter();
+            response.setContentType("text/html;charset=UTF-8");
+
+            /**
+             * Los datos son recibidos desde el archivo
+             * function_activar_cuenta.js enviados por jquery Cuando retorne a
+             * la pagina del login puede devolver 1: si entrar por otro medio 2:
+             * si hay campos vacios 3: si el usuario es incorrecto 4: usuario
+             * activo 5: comenzar proceso
+             */
+            if (request.getParameter("btnVerificar") != null) {
+                String user = request.getParameter("user");//retornal el usuario
+                //verficiando campos vacios
+                if (!user.equals("")) {
+                    Ciudadano c = mostrarVotante(user);
+                    //verificando el usuario
+                    if (user.equals(c.getNumDui())) {
+                        //verificando que el usuario este activo en el sistema  
+                        if (c.getConfirmacion() == 0) {
+                            //usuario encontrado
+                            out.print("5");//comenzar proceso
+                        } else {
+                            out.print("4");//usuario activo
+                        }
                     } else {
-                        out.print("2");//cuenta activada
+                        out.print("3");//usuario incorrecto
                     }
                 } else {
-                    out.print("3");//campos vacios
+                    out.print("2");//campos vacios
                 }
+            } else if (request.getParameter("btnActivar") != null) {
+                String user = request.getParameter("user");//captura el usuario
+                String pass = request.getParameter("pass");//captura la contraseña
+                int preg = Integer.parseInt(request.getParameter("preg"));//captura la id pregunta
+                String res = request.getParameter("res");//captura la respuesta
+                //veficando que los campos no esten vacios
+                if (!user.equals("") && !pass.equals("") && !res.equals("")) {
+                    Ciudadano c = mostrarVotante(user);
+                    if (c.getConfirmacion() == 0) {
+                        CiudadanoDTO.activarCuenta(c.getIdUsuario());
+                        RespuestaDTO.agregarRespuesta(c.getIdUsuario(), preg, res);
+                        CiudadanoDTO.actualizarContra(pass,c.getIdUsuario());
+                        out.print("4");//cuenta activada
+                    } else {
+                        out.print("3");//cuenta ya activada
+                    }
+                } else {
+                    out.print("2");//campos vacios
+                }
+            } else {
+                out.print("1");//redireccinar a pagina de advertencia
+            }
 
-            }
-            if (request.getParameter("divHtml") != null) {
-                String html = "<div class=\"input-group\">"
-                        + "<span class=\"input-group-addon\">"
-                        + "<i class=\"material-icons col-light-blue\">lock</i>"
-                        + "</span>"
-                        + "<div class=\"form-line\">"
-                        + "<input type=\"password\" class=\"form-control\" name=\"txtPass2\" id=\"txtPass2\" placeholder=\"Repita la contraseña\" required>"
-                        + "</div>"
-                        + "</div>"
-                        + "<div class=\"input-group\">"
-                        + "<span class=\"input-group-addon\">"
-                        + "<i class=\"material-icons col-light-blue\">lock</i>"
-                        + "</span>"
-                        + mostrarPreguntas()
-                        + "</div>"
-                        + "<div class=\"input-group\">"
-                        + "<span class=\"input-group-addon\">"
-                        + "<i class=\"material-icons col-light-blue\">person</i>"
-                        + "</span>"
-                        + "<div class=\"form-line\">"
-                        + "<input type=\"text\" class=\"form-control\" name=\"txtRespuesta\" id=\"txtRespuesta\" placeholder=\"Ingrese su respuesta\" required autofocus>"
-                        + "</div>"
-                        + "</div>";
-                out.print(html);
-            }
-            if (request.getParameter("txtActivar") != null) {
-                String user = request.getParameter("txtUser");
-                String pass = request.getParameter("txtPass");
-                String pass2 = request.getParameter("txtPass2");
-                int idPregunta = Integer.valueOf(request.getParameter("idPregunta"));
-                String respuesta = request.getParameter("txtRespuesta");
-                /*Ciudadano c = CiudadanoDTO.entrarVotante(user, pass);
-                CiudadanoDTO.activarCuenta(c.getIdUsuario());
-                System.out.println(c.getIdUsuario());
-                Respuesta r =new  Respuesta(c.getIdUsuario(),idPregunta,respuesta);
-                if(CiudadanoDTO.ingresarRespuesta(r)==true){
-                    out.print("verdadero");
-                }else{
-                    out.print("Falso");
-                }*/
-                
-            }
         } catch (Exception e) {
+            response.sendRedirect("pages/notificaciones/tse_advertencia.jsp");
         }
     }
 

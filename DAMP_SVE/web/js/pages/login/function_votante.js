@@ -2,7 +2,6 @@
  *Funciones aplicadas al login del votante
  */
 $(document).on("ready", function () {
-
     var key1 = window.location.pathname;
     var key2 = $("#btnEntrar").css("background-color");
     $("#btnEntrar").on("click", function () {

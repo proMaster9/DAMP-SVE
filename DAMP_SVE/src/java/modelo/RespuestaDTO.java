@@ -42,4 +42,46 @@ public class RespuestaDTO {
         return r;
         
     }
+    public static boolean agregarRespuesta(int idUsuario,int idPregunta, String respuesta) {
+        String query = "insert into respuesta values(?,?,?);";
+        try {
+            pst = con.getCnn().prepareStatement(query);
+            pst.setInt(1, idUsuario);
+            pst.setInt(2, idPregunta);
+            pst.setString(3, respuesta);
+            pst.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CiudadanoDTO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+            con.desconectar();
+        }
+        return true;
+        
+    }
+    public static boolean modificarRespuesta(int idPregunta, String respuesta, int idUsuario) {
+        String query = "update respuesta set id_pregunta=?, respuesta=? where id_usuario=?";
+        try {
+            pst = con.getCnn().prepareStatement(query);
+            
+            pst.setInt(1, idPregunta);
+            pst.setString(2, respuesta);
+            pst.setInt(3, idUsuario);
+            pst.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CiudadanoDTO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+            con.desconectar();
+        }
+        return true;
+        
+    }
+    /*public static void main(String[] args) {
+        
+        Respuesta r = RespuestaDTO.verificarRespuesta(3);
+        System.out.println(r.getIdPregunta()+r.getRespuesta() +r.getIdUsuario());
+    }*/
 }

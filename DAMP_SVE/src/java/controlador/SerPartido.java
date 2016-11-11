@@ -34,7 +34,7 @@ public class SerPartido extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         //ruta relativa en donde se guardan las imagenes de partidos
-        String ruta = getServletContext().getRealPath("/")+"images/files/banderas/";
+        String ruta = getServletContext().getRealPath("/")+"images/files/banderas/";//imagenes de los partidos politicos
         Partido p = new Partido();
         int accion = 1; //1=gregar  2=modificar
         if (ServletFileUpload.isMultipartContent(request)) {

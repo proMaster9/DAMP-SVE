@@ -166,6 +166,7 @@ public class CiudadanoDTO {
         return c;
     }
 
+
     /*
      en esta funcion se registran todos los usuarios del sistema a excepcion
      del supervisor externo.
@@ -551,27 +552,25 @@ public class CiudadanoDTO {
         }
         return false;
     }
-    public static boolean ingresarRespuesta(Respuesta r) {
-        String query = "insert into respuesta values(?,?,?);";
+     public static boolean actualizarContra(String pass, int idUsuario) {
+        String query = "update usuario set contrasenia=? where id_usuario=?";
         try {
             pst = con.getCnn().prepareStatement(query);
-            pst.setInt(1, r.getIdUsuario());
-            pst.setInt(2, r.getIdPregunta());
-            pst.setString(3, r.getRespuesta());
+            pst.setString(1, pass);
+            pst.setInt(2, idUsuario);
             pst.executeUpdate();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(CiudadanoDTO.class.getName()).log(Level.SEVERE, null, ex);
-            
         } finally {
             con.desconectar();
         }
         return false;
     }
-    /*public static void main(String[] args) {
-        Ciudadano c=CiudadanoDTO.entrarVotante("00000003-0","12345",1,"abc");
-        Respuesta r= RespuestaDTO.verificarRespuesta(c.getIdUsuario());
-        
-       
-    }*/
+    public static void main(String[] args) {
+        /*Ciudadano c=CiudadanoDTO.entrarVotante("00000003-0","12345",1,"abc");
+        Respuesta r= RespuestaDTO.verificarRespuesta(c.getIdUsuario());*/
+        //Ciudadano c= mostrarVotante("00000003-0");
+        //System.out.println(""+c.getNumDui());
+    }
 }

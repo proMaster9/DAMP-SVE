@@ -11,6 +11,7 @@ function limpiarLogin() {
 }
 /*=============Funcion validar acceso===============*/
 function validarAcceso(data) {
+    alert(data);
     if(data==="0"){
         $(".grafico").html("<img src=\"../../images/acciones_ico/campo_vacio.png\"/>");
         $(".texto").html("No has seleccionado la pregunta de seguridad");

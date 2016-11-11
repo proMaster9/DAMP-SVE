@@ -68,6 +68,10 @@
         <servlet-name>SerSesionVotante</servlet-name>
         <servlet-class>controlador.SerSesionVotante</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerPapeleta</servlet-name>
+        <servlet-class>controlador.SerPapeleta</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerPartido</servlet-name>
         <url-pattern>/SerPartido</url-pattern>
@@ -135,6 +139,10 @@
     <servlet-mapping>
         <servlet-name>SerSesionVotante</servlet-name>
         <url-pattern>/SerSesionVotante</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerPapeleta</servlet-name>
+        <url-pattern>/SerPapeleta</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

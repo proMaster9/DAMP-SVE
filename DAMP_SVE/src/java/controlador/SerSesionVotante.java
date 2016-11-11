@@ -114,9 +114,9 @@ public class SerSesionVotante extends HttpServlet {
                                     if (preg==r.getIdPregunta() && res.equals(r.getRespuesta())){
                                         //contruyendo el arraylist de sesion
                                         HttpSession sesion = request.getSession();
-                                        ArrayList<Ciudadano> usuario = new ArrayList<>();
-                                        usuario.add(c);
-                                        sesion.setAttribute("usuario", usuario);
+                                        ArrayList<Ciudadano> votante = new ArrayList<>();
+                                        votante.add(c);
+                                        sesion.setAttribute("votante", votante);
                                         out.print("7");//acceso permitido
                                     }else {
                                         out.print("6");//pregunta y respuesta incorrectas
