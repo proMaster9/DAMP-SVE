@@ -4,11 +4,10 @@
     Author     : EQUIPO DAMP-2016
 --%>
 
-<%@page import="controlador.SerActivarCuenta"%>
 <%
     HttpSession sesion = request.getSession(true);
-    if (sesion.getAttribute("votante") != null) {
-        response.sendRedirect("../papeleta.jsp");
+    if (sesion.getAttribute("usuario") != null) {
+        response.sendRedirect("../tse.jsp");
     }
 %>
 
@@ -19,7 +18,7 @@
         <meta charset="UTF-8">
 
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <title>Login Votante | TSE </title>
+        <title>Login Usuario Principal | TSE </title>
         <!-- Favicon-->
         <link rel="icon" href="../../images/tse_logo_ico.png" type="image/x-icon">
         <!-- Google Fonts -->
@@ -60,22 +59,6 @@
                                 <input type="password" class="form-control" name="txtPass" id="txtPass" placeholder="Ingrese su contraseña" required>
                             </div>
                         </div>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="material-icons col-light-blue">help</i>
-                            </span>
-                            <div class="form-line">
-                                <%= SerActivarCuenta.mostrarPreguntas()%>
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="material-icons col-light-blue">chat</i>
-                            </span>
-                            <div class="form-line">
-                                <input type="text" class="form-control" name="txtRes" id="txtRes" placeholder="Ingrese su respuesta" required>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-xs-8">
                                 <label><a href='../../index.jsp' class='text-right'><i class='material-icons icons-align col-light-blue'>reply</i>REGRESAR</a></label>
@@ -95,56 +78,48 @@
                     </form>
                 </div>
             </div>
-            <div class="login-box">
-                <div class="card" style="border:none;">
-                    <div class="logo">
-                        <center><img style="width: 98%" src="../../images/urna_voto.jpg"/></center>
+        </div>
+        <!-- ======================================Modal Dialogs==================================== -->
+        <!-- Modal Notificacion -->
+        <div class="modal fade animated" id="modalAdvertencia" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="defaultModalLabel"><i class="material-icons icons-align col-light-blue">info</i> NOTIFICACIÓN</h5>
                     </div>
-                </div>
-                <div id="urna"></div>
-            </div>
-            <!-- ======================================Modal Dialogs==================================== -->
-            <!-- Modal Notificacion -->
-            <div class="modal fade animated" id="modalAdvertencia" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="defaultModalLabel"><i class="material-icons icons-align col-light-blue">info</i> NOTIFICACIÓN</h5>
+                    <div class="modal-body text-center">
+                        <div class="mensaje">
+                            <div class="row"><div class="grafico"></div></div>
+                            <div class="row"><div class="texto"></div></div>
                         </div>
-                        <div class="modal-body text-center">
-                            <div class="mensaje">
-                                <div class="row"><div class="grafico"></div></div>
-                                <div class="row"><div class="texto"></div></div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn col-xs-offset-4 col-xs-4 col-white bg-light-blue waves-effect" data-dismiss="modal">OK, Cerrar</button>
-                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn col-xs-offset-4 col-xs-4 col-white bg-light-blue waves-effect" data-dismiss="modal">OK, Cerrar</button>
                     </div>
                 </div>
             </div>
-            <!-- #END# Modal Notificacion -->
+        </div>
+        <!-- #END# Modal Notificacion -->
 
-            <!-- Jquery Core Js -->
-            <script src="../../plugins/jquery/jquery.min.js"></script>
-            <!-- Bootstrap Core Js -->
-            <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
-            <!-- Waves Effect Plugin Js -->
-            <script src="../../plugins/node-waves/waves.js"></script>
-            <!-- Validation Plugin Js -->
-            <script src="../../plugins/jquery-validation/jquery.validate.js"></script>
-            <!-- Custom Js -->
-            <script src="../../js/admin.js"></script>
-            <script src="../../js/pages/ui/modals.js"></script>
+        <!-- Jquery Core Js -->
+        <script src="../../plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap Core Js -->
+        <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+        <!-- Waves Effect Plugin Js -->
+        <script src="../../plugins/node-waves/waves.js"></script>
+        <!-- Validation Plugin Js -->
+        <script src="../../plugins/jquery-validation/jquery.validate.js"></script>
+        <!-- Custom Js -->
+        <script src="../../js/admin.js"></script>
+        <script src="../../js/pages/ui/modals.js"></script>
 
-            <!-- =====================Respuesta Servidor==================================== -->
-            <script src="../../js/pages/login/respuesta_votar.js"></script> 
-            <!-- ================#END#Respuesta Servidor==================================== -->
+        <!-- =====================Respuesta Servidor==================================== -->
+        <script src="../../js/pages/login/respuesta_servidor.js"></script> 
+        <!-- ================#END#Respuesta Servidor==================================== -->
 
-            <!-- =====================Script que contiene las peticiones al servidor==================================== -->
-            <script src="../../js/pages/login/function_votante.js"></script>
-            <!-- ================#END#Script que contiene las peticiones al servidor==================================== -->
-
+        <!-- =====================Script que contiene las peticiones al servidor==================================== -->
+        <script src="../../js/pages/login/function_principal.js"></script> 
+        <!-- ================#END#Script que contiene las peticiones al servidor==================================== -->
     </body>
 </html>
 

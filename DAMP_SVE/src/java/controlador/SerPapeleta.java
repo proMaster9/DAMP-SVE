@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.Candidato;
 import modelo.CandidatoDTO;
 import modelo.Ciudadano;
@@ -49,14 +50,25 @@ public class SerPapeleta extends HttpServlet {
     public static String mostrarPapeleta(int idDepartamento) {
         String html = "";
         for (Partido p : PartidoDTO.mostrarPartidos()) {
-            html += "<div id='divPartido' class='partido'>";
-            html += "<img src='../images/files/partidos/" + p.getImagen() + "' class='img-responsive img-thumbnail' data-tipo='partido' data-id-partido='" + p.getIdPartido() + "' data-estado='habilitado' data-seleccion='deseleccionado'/>";
+            html += "<div class=\"col-lg-3 col-md-3 col-sm-6 col-xs-12\">"
+                    + "   <div id='divPartido' class=\"info-box hover-expand-effect partido\">"
+                    + "       <div class=\"icon\">"
+                    + "              <img src='../images/files/partidos/" + p.getImagen() + "' class='img-responsive img-thumbnail' style=\"width: 100%;height: 100%;\" data-tipo='partido' data-id-partido='" + p.getIdPartido() + "' data-estado='habilitado' data-seleccion='deseleccionado'/>"
+                    + "       </div>"
+                    + "       <div class=\"content\">"
+                    + "               <div class=\"text\">" + p.getAcronimo() + "</div>"
+                    + "       </div>"
+                    + "   </div>";
             for (Candidato c : CandidatoDTO.mostrarCandidatosDep(idDepartamento)) {
                 if (c.getIdPartido() == p.getIdPartido()) {
-                    html += "<div>";
-                    html += "<img src='../images/files/candidatos/" + c.getFoto() + "' class='img-responsive img-thumbnail deseleccionado' data-tipo='candidato' data-id-candidato='" + c.getIdCandidato() + "' data-partido='" + p.getIdPartido() + "' data-estado='habilitado' data-seleccion='deseleccionado'>";
-                    html += "<br>" + CiudadanoDTO.mostrarVotante(c.getNumDui()).getApellido() + ", " + CiudadanoDTO.mostrarVotante(c.getNumDui()).getNombre();
-                    html += "</div>";
+                    html += "<div class=\"info-box hover-expand-effect\">"
+                            + "       <div class=\"icon\">"
+                            + "              <img src='../images/files/candidatos/" + c.getFoto() + "' class='img-responsive img-thumbnail deseleccionado' style=\"width: 100%;height: 100%;\" data-tipo='candidato'  data-id-candidato='" + c.getIdCandidato() + "' data-partido='" + p.getIdPartido() + "' data-estado='habilitado' data-seleccion='deseleccionado'>"
+                            + "       </div>"
+                            + "       <div class=\"content\">"
+                            + "               <div class=\"text\">" + CiudadanoDTO.mostrarVotante(c.getNumDui()).getApellido() + "<br>" + CiudadanoDTO.mostrarVotante(c.getNumDui()).getNombre() + "</div>"
+                            + "       </div>"
+                            + "   </div>";
                 }
             }
             html += "</div>";
@@ -67,6 +79,7 @@ public class SerPapeleta extends HttpServlet {
     public static int estadoVotante(int idUsuario) {
         return VotoDTO.estadoVotante(idUsuario);
     }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -81,9 +94,13 @@ public class SerPapeleta extends HttpServlet {
             if (VotoDTO.agregarVotoBandera(v)) {
                 //se realiza con exito el voto por bandera
                 out.print("1");
+                HttpSession sesion = request.getSession(true);
+                sesion.invalidate();
             } else {
                 //ocurre algun error con al registrar el voto
                 out.print("0");
+                HttpSession sesion = request.getSession(true);
+                sesion.invalidate();
             }
         }
 
@@ -94,9 +111,13 @@ public class SerPapeleta extends HttpServlet {
             //si el voto es correcto
             if (VotoDTO.agregarVotoMarca(votante, candidatos)) {
                 out.print("1");
+                HttpSession sesion = request.getSession(true);
+                sesion.invalidate();
             } //en caso de que ocurra un error
             else {
                 out.print("0");
+                HttpSession sesion = request.getSession(true);
+                sesion.invalidate();
             }
         }
 
@@ -106,9 +127,13 @@ public class SerPapeleta extends HttpServlet {
             //si el voto es correcto
             if (VotoDTO.agregarVotoAbstenido(votante)) {
                 out.print("1");
+                HttpSession sesion = request.getSession(true);
+                sesion.invalidate();
             } //en caso de que ocurra un error
             else {
                 out.print("0");
+                HttpSession sesion = request.getSession(true);
+                sesion.invalidate();
             }
         }
     }

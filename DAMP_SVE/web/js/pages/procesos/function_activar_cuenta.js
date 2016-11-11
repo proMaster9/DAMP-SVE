@@ -3,11 +3,14 @@
  */
 /*=============Funcion para limpiar las cajas de texto al activar cuenta===============*/
 function limpiarLogin() {
-    $("#txtUser").val("00000003-0");
+    $("#txtUser").val("");
     $("#txtPass").val("");
     $("#txtPass2").val("");
     $("#txtRes").val("");
-    
+
+}
+function salir() {
+    setTimeout("location.href='../login/votante.jsp'", 3000);
 }
 $(document).on("ready", function () {
     $("#divPaso2").hide();
@@ -15,7 +18,6 @@ $(document).on("ready", function () {
     $("#btnVerificar").on("click", function () {
         var user = $("#txtUser").val();
         $.post('../../SerActivarCuenta', {btnVerificar: true, user: user}, function (data) {
-            alert(data);
             if (data === "1") {
                 limpiarLogin();
                 window.location.href = "../../pages/notificaciones/tse_advertencia.jsp";
@@ -62,16 +64,17 @@ $(document).on("ready", function () {
                         $(".grafico").html("<img src=\"../../images/acciones_ico/campo_vacio.png\"/>");
                         $(".texto").html("Has dejado algún campo vacio");
                         $('#modalAdvertencia').modal('show');
-                    }else if (data === "3") {
+                    } else if (data === "3") {
                         limpiarLogin();
-                        $(".grafico").html("<img src=\"../../images/acciones_ico/inactivo.png\"/>");
+                        $(".grafico").html("<img src=\"../../images/acciones_ico/activado.png\"/>");
                         $(".texto").html("Tu cuenta esta activa, ya puedes iniciar sesión en el siguiente enlace: <br><a href='../../pages/login/votante.jsp'><i class='material-icons icons-align col-light-blue'>person</i> Iniciar Sesion</a>");
                         $('#modalAdvertencia').modal('show');
                     } else if (data === "4") {
                         $("#divPaso2").hide();
-                        $(".grafico").html("<img src=\"../../images/acciones_ico/inactivo.png\"/>");
+                        $(".grafico").html("<img src=\"../../images/acciones_ico/activado.png\"/>");
                         $(".texto").html("Tu cuenta fue activada con exito");
                         $('#modalAdvertencia').modal('show');
+                        salir();
 
                     } else {
                         limpiarLogin();
@@ -80,7 +83,7 @@ $(document).on("ready", function () {
                 });
             }
         } else {
-            $(".grafico").html("<img src=\"../../images/acciones_ico/credenciales_incorrectas.png\"/>");
+            $(".grafico").html("<img src=\"../../images/acciones_ico/contrasena.png\"/>");
             $(".texto").html("Las contraseñas son incorrectas");
             $('#modalAdvertencia').modal('show');
         }

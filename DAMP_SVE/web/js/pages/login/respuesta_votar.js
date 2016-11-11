@@ -11,7 +11,6 @@ function limpiarLogin() {
 }
 /*=============Funcion validar acceso===============*/
 function validarAcceso(data) {
-    alert(data);
     if(data==="0"){
         $(".grafico").html("<img src=\"../../images/acciones_ico/campo_vacio.png\"/>");
         $(".texto").html("No has seleccionado la pregunta de seguridad");
@@ -46,8 +45,8 @@ function validarAcceso(data) {
         $('#modalAdvertencia').modal('show');
         limpiarLogin();
     }else if (data === "7") {
+        window.location.href = "../../pages/tse_papeleta.jsp";
         limpiarLogin();
-        window.location.href = "../../pages/papeleta.jsp";
     } else {
         limpiarLogin();
         window.location.href = "../../pages/notificaciones/tse_sin_servidor.jsp";
